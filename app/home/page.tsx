@@ -1,8 +1,9 @@
+import StorageName from "../components/storage";
 export default function Home() {
   return (
     <main className="flex flex-col items-center pt-4">
       <div className="w-5/6 relative max-w-2xl ">
-        <p className="text-xl absolute end-0">Hi, 87Taw 💪🫡</p>
+        <StorageName />
 
         {/* workouts and add*/}
         <div className="flex justify-between  items-center mt-24">
