@@ -1,12 +1,15 @@
 "use client";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function FormRegister() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-
+  const [text, setText] = useState("");
+  const [sucess, setSucess] = useState("");
+  const { push } = useRouter();
   const handleUsername = (e: any) => {
     setUserName(e.target.value);
   };
@@ -20,8 +23,11 @@ export default function FormRegister() {
   };
 
   const axiosRequest = async () => {
+    if (!username || !password) {
+      return setText("Preencha todas as informações");
+    }
     if (password !== passwordConfirm) {
-      return alert("Password and ConfirmPassword not the same.");
+      return setText("Senhas não coincidem");
     }
     try {
       const api = await axios.post("http://localhost:3200/", {
@@ -29,6 +35,11 @@ export default function FormRegister() {
         password: password,
       });
       console.log(api);
+      setText("");
+      setSucess("Criado com sucesso");
+      setTimeout(() => {
+        push("/");
+      }, 2000);
     } catch (error: any) {
       console.log(error.response.data);
     }
@@ -37,21 +48,21 @@ export default function FormRegister() {
     <div className="flex flex-col gap-2">
       <input
         type="text"
-        placeholder="user"
+        placeholder="Usuario"
         value={username}
         onChange={handleUsername}
         className="p-2 rounded"
       />
       <input
         type="password"
-        placeholder="password"
+        placeholder="Senha"
         value={password}
         onChange={handlePassword}
         className="p-2 rounded"
       />
       <input
         type="password"
-        placeholder="password confirm"
+        placeholder="Confirmar Senha"
         value={passwordConfirm}
         onChange={handleConfirmPassword}
         className="p-2 rounded"
@@ -60,8 +71,13 @@ export default function FormRegister() {
         className="p-2  absolute end-0 bottom-0 bg-yellow-500 text-black rounded hover:bg-yellow-400 "
         onClick={axiosRequest}
       >
-        Sign Up
+        Cadastrar
       </button>
+
+      {text ? <p className="text-sm text-red-600">{text}</p> : null}
+      {sucess ? (
+        <p className="text-sm text-green-600 sucess">{sucess}</p>
+      ) : null}
     </div>
   );
 }

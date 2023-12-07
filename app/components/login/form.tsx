@@ -15,6 +15,8 @@ export default function FormLogin() {
   const { push } = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [text, setText] = useState("");
+  const [sucess, setSucess] = useState("");
 
   const handleUsername = (e: any) => {
     setUsername(e.target.value);
@@ -32,11 +34,17 @@ export default function FormLogin() {
       });
       const token = api.data.token;
       const decoded: any = jwtDecode(token);
+      console.log(decoded);
       localStorage.setItem("username", decoded.username);
-      push("/home");
+      localStorage.setItem("exercises", decoded.exercises);
+      setText("");
+      setSucess("Autenticado com sucesso");
+      setTimeout(() => {
+        push("/home");
+      }, 3000);
     } catch (err: any) {
-      alert("please check");
-      console.log(err.response.data);
+      console.log(err.response.data.error);
+      setText(err.response.data.error);
       console.log(username);
     }
   };
@@ -44,14 +52,14 @@ export default function FormLogin() {
     <div className="flex gap-2 flex-col">
       <input
         type="text"
-        placeholder="user"
+        placeholder="Usuario"
         value={username}
         onChange={handleUsername}
         className="p-2 rounded"
       />
       <input
         type="password"
-        placeholder="password"
+        placeholder="Senha"
         value={password}
         onChange={handlePassword}
         className="p-2 rounded"
@@ -62,8 +70,13 @@ export default function FormLogin() {
         onClick={axiosRequest}
         title="Enter in your account"
       >
-        Sign in
+        Entrar
       </button>
+
+      {text ? <p className="text-sm text-red-500">{text}</p> : null}
+      {sucess ? (
+        <p className="text-sm text-green-600 sucess">{sucess}</p>
+      ) : null}
     </div>
   );
 }

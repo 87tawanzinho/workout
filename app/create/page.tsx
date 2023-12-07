@@ -6,14 +6,14 @@ export default function Create() {
     <main className="flex flex-col gap-4 h-screen justify-center items-center">
       <div className="flex-col flex w-64 h-64 relative gap-4">
         <p className="text-xl">
-          Create a new<span className="text-yellow-500">account</span>
+          Crie sua<span className="text-yellow-500"> conta</span>
         </p>
         <FormRegister />
         <Link
           href="/"
           className="text-sm bottom-0 absolute text-gray-400 hover:text-gray-200"
         >
-          I have account
+          Eu tenho uma conta
           <span className="text-yellow-500 hover:text-gray-200"> !!</span>
         </Link>
       </div>

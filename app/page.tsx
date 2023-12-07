@@ -7,15 +7,14 @@ export default function Home() {
     <main className="flex flex-col gap-4 h-screen justify-center items-center">
       <div className="flex-col flex w-64 h-48 relative gap-4">
         <p className="text-xl">
-          Organize your <span className="text-yellow-500">workouts</span>
+          Organize seus <span className="text-red-600">treinos</span>
         </p>
         <FormLogin />
         <Link
           href="/create"
-          className="text-sm bottom-0 absolute text-gray-400 hover:text-gray-200"
+          className="text-sm bottom-0 absolute text-gray-600 hover:text-gray-900"
         >
-          <span className="text-yellow-500 hover:text-gray-200">Create</span> a
-          new account
+          <span className="text-red-600">Crie</span> a sua conta
         </Link>
       </div>
     </main>
