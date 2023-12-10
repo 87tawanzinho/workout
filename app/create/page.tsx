@@ -11,10 +11,10 @@ export default function Create() {
         <FormRegister />
         <Link
           href="/"
-          className="text-sm bottom-0 absolute text-gray-400 hover:text-gray-200"
+          className="text-sm bottom-0 absolute text-gray-400 hover:text-black"
         >
           Eu tenho uma conta
-          <span className="text-yellow-500 hover:text-gray-200"> !!</span>
+          <span className="text-yellow-500 "> !!</span>
         </Link>
       </div>
     </main>
