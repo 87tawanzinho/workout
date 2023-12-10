@@ -37,6 +37,8 @@ export default function FormLogin() {
       console.log(decoded);
       localStorage.setItem("username", decoded.username);
       localStorage.setItem("exercises", decoded.exercises);
+      localStorage.setItem("cartas", decoded.cartas);
+      localStorage.setItem("id", decoded.id);
       setText("");
       setSucess("Autenticado com sucesso");
       setTimeout(() => {

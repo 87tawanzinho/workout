@@ -3,3 +3,8 @@ export interface workoutI {
   description: string;
   _id: string;
 }
+
+export interface MetasI {
+  description: string;
+  _id: string;
+}
