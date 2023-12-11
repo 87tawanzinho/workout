@@ -58,7 +58,7 @@ export default function ImageEditTsx({
           <textarea
             onChange={takeValueText}
             placeholder="vamos começar?"
-            className="text-xs bg-yellow-100 h-20 p-2 w-4/5   mb-2 mt-2"
+            className=" bg-yellow-100 h-20 p-2 w-4/5   mb-2 mt-2"
           />
 
           {!isMeta ? (
