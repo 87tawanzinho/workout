@@ -3,6 +3,7 @@ export interface workoutI {
   description: string;
   _id: string;
   warn: string;
+  clicked: string;
 }
 
 export interface MetasI {

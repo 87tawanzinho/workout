@@ -43,14 +43,17 @@ export default function ModalAll({
           window.location.reload();
         }, 2500);
       } catch (err) {
+        setClicked(false);
         setFail("Ocorreu um erro, tente novamente.");
       }
     } else {
       if (!description) {
+        setClicked(false);
         return setFail("Você não preencheu nada.");
       }
 
       if (description.length >= 40) {
+        setClicked(false);
         return setFail("Seu treino está grande demais");
       }
       try {
@@ -63,6 +66,7 @@ export default function ModalAll({
               .reverse()
               .join("/"), // Inverte a ordem e junta com traços,
           });
+          setFail("");
           setSucess("Sucesso, aguarde..");
           setTimeout(() => {
             window.location.reload();

@@ -128,10 +128,10 @@ export default function Metas() {
         <div className="flex gap-1 mt-4 items-center justify-center flex-wrap">
           {data.map((metas) => (
             <div
-              className={`h-48  widthMeta bg-orange-800 p-2 overflow-y-auto relative text-white break-all text-center rounded flex items-center justify-center`}
+              className={`h-48  widthMeta bg-orange-800  overflow-y-auto relative text-white rounded flex items-center justify-center`}
               key={metas._id}
             >
-              <p className="absolute top-2 rigth-0 end-2 cursor-pointer ">
+              <p className="absolute top-2 rigth-0 end-2 cursor-pointer flex ">
                 {metas.warn && (
                   <p className="text-xs text-yellow-100">{metas.warn}</p>
                 )}
@@ -146,7 +146,7 @@ export default function Metas() {
                 />
               </p>
 
-              <p>{metas.description}</p>
+              <p className="break-words text-center">{metas.description}</p>
             </div>
           ))}
         </div>
