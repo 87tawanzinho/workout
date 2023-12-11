@@ -71,14 +71,8 @@ input {
   }
 }
 
-@media screen and (max-width: 480px) {
-  input,
-  select {
-    font-size: 16px;
-  }
-}
-
-input {
+input,
+textarea {
   touch-action: none;
 }
 
