@@ -99,7 +99,7 @@ export default function Metas() {
           ) : null}
           {data.map((metas) => (
             <div
-              className={`h-48 w-40 bg-orange-800 p-2 overflow-y-auto relative text-white break-all text-center rounded flex items-center justify-center`}
+              className={`h-48  widthMeta bg-orange-800 p-2 overflow-y-auto relative text-white break-all text-center rounded flex items-center justify-center`}
               key={metas._id}
             >
               <p className="absolute top-2 rigth-0 end-2 cursor-pointer ">
