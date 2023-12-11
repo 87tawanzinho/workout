@@ -58,9 +58,16 @@ input {
   width: 10rem;
 }
 
+.imagem {
+  height: 100;
+}
 @media (max-width: 450px) {
   .widthMeta {
     width: 8rem;
+  }
+
+  .imagem {
+    height: 150;
   }
 }
 

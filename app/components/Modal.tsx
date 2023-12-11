@@ -73,9 +73,9 @@ export default function ModalAll({
     <>
       {isOpen && (
         <div className="overflow-hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="ob w-5/6 max-w-2xl  rounded-lg flex  pb-4 items-center justify-center text-start flex-col   gap-2">
+          <div className="ob w-5/6 max-w-2xl  rounded-lg flex  pb-4 items-center justify-center text-start flex-col ">
             {children}
-            <div className="flex gap-2 justify-center items-center  mt-10 ">
+            <div className="flex gap-2 justify-center items-center  mt-2 ">
               <button
                 className="p-2 bg-orange-700 text-gray-300 rounded-lg w-32"
                 onClick={axiosRequest}
@@ -96,7 +96,9 @@ export default function ModalAll({
             {fail && <p className="text-sm text-red-600">{fail}</p>}
 
             {!sucess && !fail ? (
-              <p className="text-md sucess text-orange-600">{warn}</p>
+              <p className="text-md sucess text-orange-600 text-center">
+                {warn}
+              </p>
             ) : null}
           </div>
         </div>

@@ -53,18 +53,18 @@ export default function ImageEditTsx({
           data={Data}
         >
           <Image src={urlImg} alt="img" height={100} width={400}></Image>
-          <h2 className="text-black text-xl">{title}</h2>
-          <p className="text-orange-800 text-xs text-center p-2">{content}</p>
+          <h2 className="text-black text-md">{title}</h2>
+          <p className="text-orange-800 text-xs text-center p-2 ">{content}</p>
           <textarea
             onChange={takeValueText}
             placeholder="vamos começar?"
-            className="text-xs mt-4 bg-yellow-100 h-20 p-2 w-4/5  rounded"
+            className="text-xs bg-yellow-100 h-20 p-2 w-4/5   mb-2 mt-2"
           />
 
           {!isMeta ? (
             <input
               type="date"
-              className="rounded-lg bg-white mt-4"
+              className="rounded-lg bg-white "
               onChange={takingData}
             ></input>
           ) : null}
