@@ -15,6 +15,7 @@ export default function Metas() {
   const [data, setData] = useState<MetasI[]>([]);
   const [username, setUsername] = useState();
   const [id, setId] = useState();
+
   const axiosRequest = async () => {
     if (username !== null) {
       try {

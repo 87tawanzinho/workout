@@ -28,8 +28,9 @@ export default function FormLogin() {
   };
 
   const axiosRequest = async (): Promise<any> => {
+    setWarn("Se conectando...");
     try {
-      setWarn("Se conectando...");
+    
       const api: ApiI = await axios.post(
         "https://workout-api-taws-projects.vercel.app/login",
         {
@@ -86,7 +87,7 @@ export default function FormLogin() {
         <p className="text-sm text-green-600 sucess">{sucess}</p>
       ) : null}
 
-      {warn && <p className="text-sm text-orange-500"></p>}
+      {warn && <p className="text-sm text-orange-500">{warn}</p>}
     </div>
   );
 }

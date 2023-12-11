@@ -19,8 +19,10 @@ export default function ModalAll({
 }: ModalI) {
   const [sucess, setSucess] = useState("");
   const [fail, setFail] = useState("");
+  const [clicked, setClicked] = useState(false);
   const [warn, setWarn] = useState("");
   async function axiosRequest() {
+    setClicked(true);
     setWarn("Espere um pouco, estamos tentando criar...");
     if (!data) {
       setFail("");
@@ -52,18 +54,20 @@ export default function ModalAll({
         return setFail("Seu treino está grande demais");
       }
       try {
-        await axios.post(ApiUrl, {
-          exercise: description,
-          data: data
-            .replace(/-/g, "/")
-            .split("/") // transforma em array
-            .reverse()
-            .join("/"), // Inverte a ordem e junta com traços,
-        });
-        setSucess("Sucesso, aguarde..");
-        setTimeout(() => {
-          window.location.reload();
-        }, 2500);
+        if (!clicked) {
+          await axios.post(ApiUrl, {
+            exercise: description,
+            data: data
+              .replace(/-/g, "/")
+              .split("/") // transforma em array
+              .reverse()
+              .join("/"), // Inverte a ordem e junta com traços,
+          });
+          setSucess("Sucesso, aguarde..");
+          setTimeout(() => {
+            window.location.reload();
+          }, 2500);
+        }
       } catch (err) {
         setFail("Ocorreu um erro, tente novamente.");
       }
@@ -91,12 +95,12 @@ export default function ModalAll({
               </button>
             </div>
             {sucess && (
-              <p className="text-md sucess text-green-600">{sucess}</p>
+              <p className="text-xs sucess text-green-600">{sucess}</p>
             )}
-            {fail && <p className="text-sm text-red-600">{fail}</p>}
+            {fail && <p className="text-xs text-red-600">{fail}</p>}
 
             {!sucess && !fail ? (
-              <p className="text-md sucess text-orange-600 text-center">
+              <p className="text-xs sucess text-orange-600 text-center">
                 {warn}
               </p>
             ) : null}
