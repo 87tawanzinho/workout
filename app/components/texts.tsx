@@ -6,7 +6,7 @@ interface propsText {
 export default function TextJSX(props: propsText) {
   return (
     <div className="flex justify-between text-orange-800 text-xs mb-4 mt-4 ">
-      {props.msg1.includes("Treinos") ? (
+      {props.msg1.includes("Tarefas") ? (
         <p className="border-b border-orange-900 w-full p-2">{props.msg1}</p>
       ) : (
         <p>{props.msg1}</p>

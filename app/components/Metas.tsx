@@ -93,7 +93,7 @@ export default function Metas() {
           <TextJSX msg1="Organize suas metas pessoais por aqui" />
           <div className="h-1 bg-black"></div>
         </div>
-        <div className="flex gap-2 mt-4 items-center justify-center flex-wrap">
+        <div className="flex gap-1 mt-4 items-center justify-center flex-wrap">
           {!data || !username ? (
             <p className="text-orange-800">{warn}</p>
           ) : null}

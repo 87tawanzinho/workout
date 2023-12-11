@@ -16,6 +16,7 @@ export default function FormLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [text, setText] = useState("");
+  const [warn, setWarn] = useState("");
   const [sucess, setSucess] = useState("");
 
   const handleUsername = (e: any) => {
@@ -27,6 +28,7 @@ export default function FormLogin() {
   };
 
   const axiosRequest = async (): Promise<any> => {
+    setWarn("Se conectando...");
     try {
       const api: ApiI = await axios.post(
         "https://workout-api-taws-projects.vercel.app/login",
@@ -43,6 +45,7 @@ export default function FormLogin() {
       localStorage.setItem("cartas", decoded.cartas);
       localStorage.setItem("id", decoded.id);
       setText("");
+      setWarn("");
       setSucess("Autenticado com sucesso");
       setTimeout(() => {
         push("/home");
@@ -82,6 +85,8 @@ export default function FormLogin() {
       {sucess ? (
         <p className="text-sm text-green-600 sucess">{sucess}</p>
       ) : null}
+
+      {warn && <p className="text-sm text-orange-500"></p>}
     </div>
   );
 }

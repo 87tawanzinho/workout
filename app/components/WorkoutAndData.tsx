@@ -135,7 +135,7 @@ export default function StorageName() {
           </div>
         </div>
         {/* workouts and add*/}
-        <TextJSX msg1="Treinos" msg2="Data" />
+        <TextJSX msg1="Tarefas" msg2="Data" />
         {data.map((workout) => {
           return (
             <div

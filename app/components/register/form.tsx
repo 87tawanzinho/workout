@@ -9,6 +9,7 @@ export default function FormRegister() {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [text, setText] = useState("");
   const [sucess, setSucess] = useState("");
+  const [warn, setWarn] = useState("");
   const { push } = useRouter();
   const handleUsername = (e: any) => {
     setUserName(e.target.value);
@@ -23,6 +24,7 @@ export default function FormRegister() {
   };
 
   const axiosRequest = async () => {
+    setWarn("Aguarde, estamos tentando criar sua conta.");
     if (!username || !password) {
       return setText("Preencha todas as informações");
     }
@@ -38,6 +40,7 @@ export default function FormRegister() {
         }
       );
       console.log(api);
+      setWarn("");
       setText("");
       setSucess("Criado com sucesso");
       setTimeout(() => {
@@ -81,6 +84,7 @@ export default function FormRegister() {
       {sucess ? (
         <p className="text-sm text-green-600 sucess">{sucess}</p>
       ) : null}
+      {warn ? <p className="text-sm text-orange-600 ">{warn}</p> : null}
     </div>
   );
 }
