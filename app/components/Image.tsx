@@ -32,7 +32,7 @@ export default function ImageEditTsx({
     setOpen(true);
   }
 
-  function takingData(e) {
+  function takingData(e: any) {
     setData(e.target.value);
   }
   return (
