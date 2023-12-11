@@ -64,7 +64,7 @@ export default function Metas() {
     await axiosRequest();
   }
   return (
-    <div className="text-end  p-8 pt-14 flex flex-col">
+    <div className="text-end  p-8 pt-14 flex flex-col ">
       <div className="flex justify-center items-center">
         <Image src={giphy} alt="women training" height={200} width={200} />
       </div>
@@ -90,13 +90,13 @@ export default function Metas() {
           <TextJSX msg1="Metas na academia & saúde" />
           <div className="h-1 bg-gray-400"></div>
         </div>
-        <div className="flex gap-2 mt-4 items-center justify-center flex-wrap  ">
+        <div className="flex gap-2 mt-4 items-center justify-center flex-wrap">
           {data.map((metas) => (
             <div
-              className={`h-48 w-40 bg-${corAleatoria()} p-2 overflow-y-auto relative text-white break-all text-center rounded flex items-center justify-center`}
+              className={`h-48 w-40 bg-${corAleatoria()}  p-2 overflow-y-auto relative text-white break-all text-center rounded flex items-center justify-center`}
               key={metas._id}
             >
-              <p className="absolute top-2 rigth-0 end-2 cursor-pointer">
+              <p className="absolute top-2 rigth-0 end-2 cursor-pointer ">
                 <Image
                   src={del}
                   alt="del"

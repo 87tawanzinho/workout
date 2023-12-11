@@ -58,7 +58,7 @@ export default function StorageName() {
 
   function onMouseon() {
     if (onMouse) {
-      return "opacity-75";
+      return " bg-black p-2 text-white transition-all rounded";
     } else {
       return "";
     }
@@ -133,13 +133,15 @@ export default function StorageName() {
         {data.map((workout) => {
           return (
             <div
-              className={`flex justify-between mt-2 text-xs  break-all ${onMouseon()}  `}
+              className={`flex justify-between mt-2 text-xs  break-all transition-all ${onMouseon()}  `}
               key={workout._id}
               onMouseOver={() => {
                 setOnMouse(true);
               }}
               onMouseLeave={() => {
-                setOnMouse(false);
+                if (!onclick) {
+                  setOnMouse(false);
+                }
               }}
             >
               <div className="flex-col  break-words ">
@@ -148,12 +150,18 @@ export default function StorageName() {
               <div className="flex-col text-red-600">
                 {onMouse ? (
                   <p
-                    className="cursor-pointer hover:text-purple-800"
+                    className="cursor-pointer hover:text-purple-800  "
                     onClick={() => {
                       deleteWork(workout._id);
                     }}
                   >
-                    <Image src={deleting} alt="delete" height={16} width={16} />
+                    <Image
+                      src={deleting}
+                      alt="delete"
+                      height={24}
+                      width={24}
+                      title="delete"
+                    />
                   </p>
                 ) : (
                   <p>{workout.data}</p>
