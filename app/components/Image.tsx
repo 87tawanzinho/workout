@@ -63,11 +63,14 @@ export default function ImageEditTsx({
 
           {!isMeta ? (
             <input
-              type="date"
-              className="rounded-lg bg-white "
-              placeholder="Data"
+              type="text"
+              className="rounded-lg bg-yellow-100 text-black text-center w-32 "
+              placeholder="mm/dd/yyyy"
+              onFocus={(e) => {
+                e.target.type = "date";
+              }}
               onChange={takingData}
-            ></input>
+            />
           ) : null}
         </ModalAll>
       ) : null}
