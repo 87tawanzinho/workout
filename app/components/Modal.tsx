@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 
 interface ModalI {
   isOpen: boolean;
@@ -77,6 +77,18 @@ export default function ModalAll({
       }
     }
   }
+
+  const handleClick: MouseEventHandler<HTMLButtonElement> = async (event) => {
+    event.preventDefault();
+
+    if (!clicked) {
+      const result = await axiosRequest();
+      // Lógica adicional aqui, se necessário
+
+      // Exemplo de como usar o resultado
+      console.log(result);
+    }
+  };
   return (
     <>
       {isOpen && (
@@ -86,7 +98,7 @@ export default function ModalAll({
             <div className="flex gap-2 justify-center items-center  mt-2 ">
               <button
                 className="p-2 bg-orange-700 text-gray-300 rounded-lg w-32"
-                onClick={axiosRequest}
+                onClick={handleClick}
               >
                 Salvar
               </button>
