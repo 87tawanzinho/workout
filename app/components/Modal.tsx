@@ -19,7 +19,9 @@ export default function ModalAll({
 }: ModalI) {
   const [sucess, setSucess] = useState("");
   const [fail, setFail] = useState("");
+  const [warn, setWarn] = useState("");
   async function axiosRequest() {
+    setWarn("Espere um pouco, estamos tentando criar...");
     if (!data) {
       setFail("");
 
@@ -71,11 +73,11 @@ export default function ModalAll({
     <>
       {isOpen && (
         <div className="overflow-hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white w-5/6 max-w-2xl  rounded-lg flex  pb-4 items-center justify-center text-start flex-col   gap-2">
+          <div className="ob w-5/6 max-w-2xl  rounded-lg flex  pb-4 items-center justify-center text-start flex-col   gap-2">
             {children}
             <div className="flex gap-2 justify-center items-center  mt-10 ">
               <button
-                className="p-2 bg-green-700 text-white rounded-lg"
+                className="p-2 bg-orange-700 text-gray-300 rounded-lg w-32"
                 onClick={axiosRequest}
               >
                 Salvar
@@ -83,7 +85,7 @@ export default function ModalAll({
 
               <button
                 onClick={setOpen}
-                className=" bg-red-500 text-white rounded p-2 rounded-lg"
+                className=" bg-black text-gray-300 rounded p-1 rounded-lg"
               >
                 Fechar
               </button>
@@ -92,6 +94,10 @@ export default function ModalAll({
               <p className="text-md sucess text-green-600">{sucess}</p>
             )}
             {fail && <p className="text-sm text-red-600">{fail}</p>}
+
+            {!sucess && !fail ? (
+              <p className="text-md sucess text-orange-600">{warn}</p>
+            ) : null}
           </div>
         </div>
       )}

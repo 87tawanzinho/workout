@@ -5,8 +5,8 @@ import { workoutI } from "../interfaces/geral";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import deleting from "@/public/del.png";
-import training from "@/public/training.jpg";
-import trainingBanner from "@/public/training-model-banner.jpg";
+import training from "@/public/metas.png";
+import trainingBanner from "@/public/training-model-banner.png";
 import logout from "@/public/logout.png";
 
 import TextJSX from "./texts";
@@ -15,6 +15,7 @@ export default function StorageName() {
   const [username, setUsername] = useState(null);
   const [onMouse, setOnMouse] = useState(false);
   const [id, setId] = useState(false);
+  const [warn, setWarn] = useState("");
   const [data, setData] = useState<workoutI[]>([]);
   const { push } = useRouter();
 
@@ -65,6 +66,7 @@ export default function StorageName() {
   }
 
   async function deleteWork(idItem: string) {
+    setWarn("Deletando, aguarde..");
     try {
       await axios.delete(
         `https://workout-api-taws-projects.vercel.app/deleteExercise/${id}`,
@@ -73,6 +75,7 @@ export default function StorageName() {
         }
       );
       await axiosRequest();
+      setWarn("");
     } catch (err) {
       console.log(err);
     }
@@ -110,14 +113,14 @@ export default function StorageName() {
             width={150}
           />
 
-          <p className="text-sm text-gray-400">
-            acompanhe seus treinos com responsabilidade
+          <p className="text-sm text-black">
+            acompanhe sua vida com responsabilidade
           </p>
         </div>
         <div className="flex justify-between  items-center mt-24">
           <div>
             <h2 className="text-xl">
-              Meus <span className="font-bold">Treinos</span>
+              Minhas <span className="font-bold">Tarefas</span>
             </h2>
           </div>
 
@@ -126,8 +129,8 @@ export default function StorageName() {
               isMeta={false}
               urlImg={trainingBanner}
               ApiUrl={`https://workout-api-taws-projects.vercel.app/createExercise/${username}`}
-              title="Novo treino"
-              content="Parabéns, continue assim"
+              title="Nova tarefa"
+              content="Parabéns, continue assim, você está se tornando alguém incrível."
             />
           </div>
         </div>
@@ -169,6 +172,7 @@ export default function StorageName() {
                 ) : (
                   <p>{workout.data}</p>
                 )}
+                {warn && <p className="text-orange-800">{warn}</p>}
               </div>
             </div>
           );

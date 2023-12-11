@@ -6,10 +6,17 @@
   box-sizing: border-box;
 }
 body {
-  background: white;
+  background: #d4ab6b;
   color: black;
 }
 
+.ob {
+  background: #d4ab6b;
+}
+
+.ot {
+  color: #d4ab6b;
+}
 input {
   background: black;
   color: rgb(170, 170, 170);

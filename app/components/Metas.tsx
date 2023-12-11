@@ -6,7 +6,7 @@ import edit from "@/public/edit.png";
 import TextJSX from "./texts";
 import del from "@/public/del.png";
 import ImageEditTsx from "./Image";
-import img from "@/public/img_metas.jpg";
+import img from "@/public/img_metas.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { MetasI } from "../interfaces/geral";
@@ -14,14 +14,11 @@ import { MetasI } from "../interfaces/geral";
 export default function Metas() {
   const [data, setData] = useState<MetasI[]>([]);
   const [username, setUsername] = useState();
+  const [warn, setWarn] = useState("");
   const [id, setId] = useState();
-  const colors = ["gray-400", "red-500", "black"];
 
-  const corAleatoria = () => {
-    const corEscolhida = colors[Math.floor(Math.random() * colors.length)];
-    return corEscolhida;
-  };
   const axiosRequest = async () => {
+    setWarn("Ainda não há tarefas aqui. );");
     if (username !== null) {
       try {
         const response = await axios.post(
@@ -89,17 +86,20 @@ export default function Metas() {
             urlImg={img}
           />
         </div>
-        <p className="text-xs text-gray-400">
+        <p className="text-xs text-orange-800">
           coloque seus sonhos e objetivos por aqui!
         </p>
         <div className="ml-4">
-          <TextJSX msg1="Metas na academia & saúde" />
-          <div className="h-1 bg-gray-400"></div>
+          <TextJSX msg1="Organize suas metas pessoais por aqui" />
+          <div className="h-1 bg-black"></div>
         </div>
         <div className="flex gap-2 mt-4 items-center justify-center flex-wrap">
+          {!data || !username ? (
+            <p className="text-orange-800">{warn}</p>
+          ) : null}
           {data.map((metas) => (
             <div
-              className={`h-48 w-40 bg-${corAleatoria()}  p-2 overflow-y-auto relative text-white break-all text-center rounded flex items-center justify-center`}
+              className={`h-48 w-40 bg-orange-800 p-2 overflow-y-auto relative text-white break-all text-center rounded flex items-center justify-center`}
               key={metas._id}
             >
               <p className="absolute top-2 rigth-0 end-2 cursor-pointer ">
