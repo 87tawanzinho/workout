@@ -65,6 +65,7 @@ export default function ImageEditTsx({
             <input
               type="date"
               className="rounded-lg bg-white "
+              placeholder="Data"
               onChange={takingData}
             ></input>
           ) : null}
