@@ -22,7 +22,7 @@ export default function StorageName() {
     if (username !== null) {
       try {
         const response = await axios.post(
-          "http://localhost:3200/showExercises",
+          "https://workout-api-taws-projects.vercel.app/showExercises",
           {
             user: username,
           }
@@ -66,9 +66,12 @@ export default function StorageName() {
 
   async function deleteWork(idItem: string) {
     try {
-      await axios.delete(`http://localhost:3200/deleteExercise/${id}`, {
-        data: { idGym: idItem },
-      });
+      await axios.delete(
+        `https://workout-api-taws-projects.vercel.app/deleteExercise/${id}`,
+        {
+          data: { idGym: idItem },
+        }
+      );
       await axiosRequest();
     } catch (err) {
       console.log(err);
@@ -122,7 +125,7 @@ export default function StorageName() {
             <ImageEditTsx
               isMeta={false}
               urlImg={trainingBanner}
-              ApiUrl={`http://localhost:3200/createExercise/${username}`}
+              ApiUrl={`https://workout-api-taws-projects.vercel.app/createExercise/${username}`}
               title="Novo treino"
               content="Parabéns, continue assim"
             />

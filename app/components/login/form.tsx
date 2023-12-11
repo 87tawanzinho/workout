@@ -28,10 +28,13 @@ export default function FormLogin() {
 
   const axiosRequest = async (): Promise<any> => {
     try {
-      const api: ApiI = await axios.post("http://localhost:3200/login", {
-        user: username,
-        password: password,
-      });
+      const api: ApiI = await axios.post(
+        "https://workout-api-taws-projects.vercel.app/login",
+        {
+          user: username,
+          password: password,
+        }
+      );
       const token = api.data.token;
       const decoded: any = jwtDecode(token);
       console.log(decoded);

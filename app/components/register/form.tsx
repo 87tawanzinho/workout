@@ -30,10 +30,13 @@ export default function FormRegister() {
       return setText("Senhas não coincidem");
     }
     try {
-      const api = await axios.post("http://localhost:3200/", {
-        user: username,
-        password: password,
-      });
+      const api = await axios.post(
+        "https://workout-api-taws-projects.vercel.app/",
+        {
+          user: username,
+          password: password,
+        }
+      );
       console.log(api);
       setText("");
       setSucess("Criado com sucesso");

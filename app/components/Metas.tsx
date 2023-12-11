@@ -24,9 +24,12 @@ export default function Metas() {
   const axiosRequest = async () => {
     if (username !== null) {
       try {
-        const response = await axios.post("http://localhost:3200/showMetas", {
-          user: username,
-        });
+        const response = await axios.post(
+          "https://workout-api-taws-projects.vercel.app/showMetas",
+          {
+            user: username,
+          }
+        );
         console.log(response.data);
         setData(response.data.reverse());
       } catch (err) {
@@ -57,9 +60,12 @@ export default function Metas() {
   }, [username]);
 
   async function deleteMeta(idCart: any) {
-    const api = await axios.delete(`http://localhost:3200/deleteMeta/${id}`, {
-      data: { MetaToDelete: idCart },
-    });
+    const api = await axios.delete(
+      `https://workout-api-taws-projects.vercel.app/deleteMeta/${id}`,
+      {
+        data: { MetaToDelete: idCart },
+      }
+    );
     console.log(api);
     await axiosRequest();
   }
@@ -79,7 +85,7 @@ export default function Metas() {
             title="Criar uma nova meta"
             content="suas cartinhas serão registradas aqui"
             isMeta={true}
-            ApiUrl={`http://localhost:3200/createMeta/${username}`}
+            ApiUrl={`https://workout-api-taws-projects.vercel.app/createMeta/${username}`}
             urlImg={img}
           />
         </div>
