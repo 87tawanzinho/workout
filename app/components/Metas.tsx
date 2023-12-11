@@ -14,11 +14,8 @@ import { MetasI } from "../interfaces/geral";
 export default function Metas() {
   const [data, setData] = useState<MetasI[]>([]);
   const [username, setUsername] = useState();
-  const [warn, setWarn] = useState("");
   const [id, setId] = useState();
-
   const axiosRequest = async () => {
-    setWarn("Ainda não há tarefas aqui. );");
     if (username !== null) {
       try {
         const response = await axios.post(
@@ -27,7 +24,7 @@ export default function Metas() {
             user: username,
           }
         );
-        console.log(response.data);
+
         setData(response.data.reverse());
       } catch (err) {
         console.error(err);
@@ -57,15 +54,49 @@ export default function Metas() {
   }, [username]);
 
   async function deleteMeta(idCart: any) {
-    const api = await axios.delete(
-      `https://workout-api-taws-projects.vercel.app/deleteMeta/${id}`,
-      {
-        data: { MetaToDelete: idCart },
-      }
-    );
-    console.log(api);
-    await axiosRequest();
+    try {
+      const newData = data.map((meta) => {
+        if (meta._id === idCart) {
+          return { ...meta, warn: "Deletando, aguarde..." };
+        }
+        return meta;
+      });
+
+      setData(newData);
+
+      // Realize a exclusão
+      await axios.delete(
+        `https://workout-api-taws-projects.vercel.app/deleteMeta/${id}`,
+        {
+          data: { MetaToDelete: idCart },
+        }
+      );
+
+      // Atualize a propriedade 'warn' para a carta específica
+      const updatedData = newData.map((meta) => {
+        if (meta._id === idCart) {
+          return { ...meta, warn: "" };
+        }
+        return meta;
+      });
+
+      setData(updatedData);
+
+      await axiosRequest();
+    } catch (error) {
+      console.error(error);
+      // Atualize a propriedade 'warn' para indicar erro
+      const errorData = data.map((meta) => {
+        if (meta._id === idCart) {
+          return { ...meta, warn: "Erro ao deletar. Tente novamente." };
+        }
+        return meta;
+      });
+
+      setData(errorData);
+    }
   }
+
   return (
     <div className="text-end  p-8 pt-14 flex flex-col ">
       <div className="flex justify-center items-center">
@@ -94,15 +125,15 @@ export default function Metas() {
           <div className="h-1 bg-black"></div>
         </div>
         <div className="flex gap-1 mt-4 items-center justify-center flex-wrap">
-          {!data || !username ? (
-            <p className="text-orange-800">{warn}</p>
-          ) : null}
           {data.map((metas) => (
             <div
               className={`h-48  widthMeta bg-orange-800 p-2 overflow-y-auto relative text-white break-all text-center rounded flex items-center justify-center`}
               key={metas._id}
             >
               <p className="absolute top-2 rigth-0 end-2 cursor-pointer ">
+                {metas.warn && (
+                  <p className="text-xs text-yellow-100">{metas.warn}</p>
+                )}
                 <Image
                   src={del}
                   alt="del"
@@ -113,6 +144,7 @@ export default function Metas() {
                   }}
                 />
               </p>
+
               <p>{metas.description}</p>
             </div>
           ))}

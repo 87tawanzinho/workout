@@ -15,7 +15,6 @@ export default function StorageName() {
   const [username, setUsername] = useState(null);
   const [onMouse, setOnMouse] = useState(false);
   const [id, setId] = useState(false);
-  const [warn, setWarn] = useState("");
   const [data, setData] = useState<workoutI[]>([]);
   const { push } = useRouter();
 
@@ -66,16 +65,32 @@ export default function StorageName() {
   }
 
   async function deleteWork(idItem: string) {
-    setWarn("Deletando, aguarde..");
     try {
+      const newData = data.map((workout) => {
+        if (workout._id === idItem) {
+          // atualizamos a carta que clicamos com uma mensagem
+          return { ...workout, warn: "Deletando, aguarde.." };
+        }
+        return workout;
+      });
+
+      setData(newData);
       await axios.delete(
         `https://workout-api-taws-projects.vercel.app/deleteExercise/${id}`,
         {
           data: { idGym: idItem },
         }
       );
+      const updatedData = newData.map((workout) => {
+        if (workout._id === idItem) {
+          // tiramos a mensagem
+          return { ...workout, warn: "" };
+        }
+        return workout;
+      });
+
+      setData(updatedData);
       await axiosRequest();
-      setWarn("");
     } catch (err) {
       console.log(err);
     }
@@ -172,7 +187,9 @@ export default function StorageName() {
                 ) : (
                   <p>{workout.data}</p>
                 )}
-                {warn && <p className="text-orange-800">{warn}</p>}
+                {workout.warn && (
+                  <p className="text-yellow-100">{workout.warn}</p>
+                )}
               </div>
             </div>
           );
