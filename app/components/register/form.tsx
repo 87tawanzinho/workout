@@ -84,7 +84,9 @@ export default function FormRegister() {
       {sucess ? (
         <p className="text-sm text-green-600 sucess">{sucess}</p>
       ) : null}
-      {warn ? <p className="text-sm text-orange-600 ">{warn}</p> : null}
+      {!text || !sucess ? (
+        <p className="text-sm text-orange-500">{warn}</p>
+      ) : null}
     </div>
   );
 }
