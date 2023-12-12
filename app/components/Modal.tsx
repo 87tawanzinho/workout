@@ -111,12 +111,12 @@ export default function ModalAll({
               </button>
             </div>
             {sucess && (
-              <p className="text-xs sucess text-green-600">{sucess}</p>
+              <p className="text-xs sucess mt-2 text-green-600">{sucess}</p>
             )}
-            {fail && <p className="text-xs text-red-600">{fail}</p>}
+            {fail && <p className="text-xs mt-2 text-red-600">{fail}</p>}
 
             {!sucess && !fail ? (
-              <p className="text-xs sucess text-orange-600 text-center">
+              <p className="text-xs mt-2 sucess text-orange-600 text-center">
                 {warn}
               </p>
             ) : null}

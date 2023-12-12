@@ -87,7 +87,7 @@ export default function FormLogin() {
       ) : null}
 
       {!text || !sucess ? (
-        <p className="text-sm text-orange-500">{warn}</p>
+        <p className="text-sm text-orange-800">{warn}</p>
       ) : null}
     </div>
   );
