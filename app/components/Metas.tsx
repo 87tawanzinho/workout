@@ -101,7 +101,7 @@ export default function Metas() {
   return (
     <div className="text-end  p-8 pt-14 flex flex-col ">
       <div className="flex justify-center items-center">
-        <Image src={giphy} alt="women training" height={200} width={200} />
+        <Image src={giphy} alt="women training" height={150} width={150} />
       </div>
 
       <div className="mt-10">
