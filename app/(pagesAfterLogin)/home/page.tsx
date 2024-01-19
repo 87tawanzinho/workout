@@ -12,6 +12,7 @@ function PageHome() {
       <div className=" bg-white h-auto lg:h-60  w-full lg:w-60  p-8 ml-0 lg:ml-40 mt-4 lg:mt-10  rounded-lg  flex ">
         <NameOfClient />
       </div>
+
       <main className="flex flex-col  items-center w-full">
         <MyExpenses
           text={" Minhas Despesas - Renda Mensal"}
@@ -19,6 +20,7 @@ function PageHome() {
           span={<IncomeBills />}
         />
         <ItensExpenses
+          type="Bills"
           data={
             <div className="flex justify-between">
               <p>Meu Salario</p>
