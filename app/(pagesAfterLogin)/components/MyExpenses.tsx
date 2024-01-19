@@ -92,7 +92,14 @@ function MyExpenses({ text, span, income }: Expenses) {
 
       {openNew && (
         <div className=" flex items-center justify-center h-full top-0 left-0 fixed w-full bg-black bg-opacity-75">
-          <div className=" rounded-xl shadow-2xl bg-white w-11/12 lg:w-9/12 h-96 p-4">
+          <div className=" rounded-xl shadow-2xl bg-white w-11/12 lg:w-9/12 h-96 p-4 relative">
+            <p
+              className="max-w-min  absolute end-4 top-4 text-red-700 cursor-pointer hover:opacity-75"
+              onClick={() => setopenNew(false)}
+            >
+              X
+            </p>
+
             <p>{income === "Bills" ? "Nova Despesa" : "Novo Boleto"}</p>
             <div className="flex  flex-col gap-4 flex-wrap">
               <div className="flex gap-0 lg:gap-4 flex-wrap">
