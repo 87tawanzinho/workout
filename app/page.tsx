@@ -1,15 +1,30 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { instance } from "./axios/instance";
+import { jwtDecode } from "jwt-decode";
 export default function Home() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSignUp = async () => {
+    setError("");
     try {
+      const res = await instance.post("login", {
+        name,
+        password,
+      });
+      const token = res.data.token;
+      const tokenDecode = jwtDecode(token) as jwtToken;
+      localStorage.setItem("name", tokenDecode.name);
+      localStorage.setItem("incomeBills", tokenDecode.mensalIncomeBills);
+      localStorage.setItem("incomeTickets", tokenDecode.mensalIncomeTickets);
+      setError("");
       router.push("/home");
     } catch (e) {
+      setError("Algo de errado, verifique.");
       console.error(e);
     }
   };
@@ -26,7 +41,7 @@ export default function Home() {
             type="text"
             placeholder="E-mail"
             className="p-2"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
           <input
             type="password"
@@ -40,6 +55,7 @@ export default function Home() {
           >
             Entrar
           </button>
+          {error && error}
           <p
             className="text-yellow-400 text-end hover:border-b-2  cursor-pointer"
             onClick={() => router.push("/sign-up")}
@@ -59,4 +75,12 @@ export default function Home() {
       </div>
     </main>
   );
+}
+
+interface jwtToken {
+  name: string;
+  id: number;
+  email: string;
+  mensalIncomeBills: string;
+  mensalIncomeTickets: string;
 }

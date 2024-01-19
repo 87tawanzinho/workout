@@ -2,10 +2,15 @@ import React from "react";
 import MyExpenses from "../components/MyExpenses";
 import ItensExpenses from "../components/ItensExpenses";
 import { FaRegEdit } from "react-icons/fa";
+import IncomeTickets from "../datas/incomeTickets";
 function MySlips() {
   return (
     <main className="flex flex-col  items-center h-screen w-full bg-gray-100">
-      <MyExpenses text="Meus boletos - Orçamento mensal de " span="R$ 2,500" />
+      <MyExpenses
+        text="Meus boletos - Orçamento mensal de "
+        income="Tickets"
+        span={<IncomeTickets />}
+      />
       <ItensExpenses
         data={
           <div className="flex justify-between">

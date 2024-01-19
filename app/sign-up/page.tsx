@@ -1,13 +1,21 @@
 "use client";
+import axios from "axios";
 import React, { useState } from "react";
 import { GiBurningBook } from "react-icons/gi";
+import { instance } from "../axios/instance";
 function SignUpPage() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignUp = async () => {
+    if (password !== confirmPassword) {
+      return alert("Erro, verifique");
+    }
     try {
-      console.log(email, password);
+      const res = await instance.post("", { email, name, password }); // cria um usuario
+      console.log(res);
     } catch (e) {
       console.error(e);
     }
@@ -24,7 +32,7 @@ function SignUpPage() {
           type="text"
           placeholder="Nome"
           className="p-2"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
 
         <input
@@ -45,7 +53,7 @@ function SignUpPage() {
           type="password"
           placeholder="Confirmar Senha"
           className="p-2"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
         <button
           onClick={handleSignUp}
