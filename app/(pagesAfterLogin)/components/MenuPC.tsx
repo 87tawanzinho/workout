@@ -4,7 +4,7 @@ import Avatar from "./Avatar";
 
 function MenuPC() {
   return (
-    <nav className="hidden lg:flex justify-between px-24 p-4 items-center bg-purple-400 relative text-gray-100">
+    <nav className="hidden fixed lg:flex justify-between px-24 p-4 items-center bg-purple-400 w-full top-0  text-gray-100">
       <div className="flex gap-8 items-center">
         <Avatar />
         <Link href={"/home"} className="hover:text-yellow-400">

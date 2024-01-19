@@ -7,7 +7,7 @@ import Link from "next/link";
 function MenuMobile() {
   const [openMenu, setOpenMenu] = useState(false);
   return (
-    <nav className="flex lg:hidden bg-purple-400 p-1 justify-between items-center text-xl relative  ">
+    <nav className="flex fixed lg:hidden bg-purple-400 p-1 justify-between items-center text-xl w-full top-0  ">
       <h2 className="">Bancos & Cia</h2>
       <IoMdMenu size={40} onClick={() => setOpenMenu(true)} />
 

@@ -8,7 +8,7 @@ import IncomeBills from "../datas/incomeBills";
 
 function PageHome() {
   return (
-    <div className=" h-screen px-0 lg:px-24">
+    <div className=" h-screen px-0 lg:px-24 pt-10">
       <div className=" bg-white h-auto lg:h-60  w-full lg:w-60  p-8 ml-0 lg:ml-40 mt-4 lg:mt-10  rounded-lg  flex ">
         <NameOfClient />
       </div>
