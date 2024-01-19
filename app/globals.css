@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html,
+:root {
+  transition: all;
+  color: rgb(44, 44, 44);
+}
+
+.bg-home {
+  background: rgb(21, 8, 24);
+  color: rgb(230, 230, 230);
+}
+
+.bg-home input {
+  color: rgb(51, 50, 50);
+}
+
+body:hover,
+html:hover,
+:root:hover {
+  transition: all;
+}
