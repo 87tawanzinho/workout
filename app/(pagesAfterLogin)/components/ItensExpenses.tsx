@@ -12,7 +12,7 @@ function ItensExpenses({ data, total, type }: ItensExpenses) {
 
       <div className="mt-10 pb-2 text-xl">
         Total do mês: R${" "}
-        <span className={`${total <= -1 ? "text-red-700" : "text-green-700"}`}>
+        <span className={`${total <= -1 ? "text-red-600" : "text-green-600"}`}>
           {" "}
           {total}
         </span>

@@ -5,9 +5,14 @@
 body,
 html,
 :root {
+  box-sizing: border-box;
   transition: all;
   color: rgb(39, 39, 39);
   background: #e0dedd9c;
+}
+
+input[type="date"] {
+  background: rgb(135, 190, 130);
 }
 
 input,

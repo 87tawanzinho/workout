@@ -54,6 +54,7 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
       userName: localStorage.getItem("name"),
       name: newPay?.description,
       price: newPay?.price,
+      date: newPay?.date,
     });
     setopenNew(false);
     fetchDataAndSetBills(setData);
@@ -66,7 +67,9 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
           <h2> {text}</h2>
           <div className="flex gap-4 items-center">
             {" "}
-            <span className={`${hide ? "blur-sm" : null}`}>{span}</span>{" "}
+            <span className={`${hide ? "blur-sm" : null} text-green-600`}>
+              {span}
+            </span>{" "}
             <BiHide
               className="cursor-pointer"
               size={20}
@@ -111,7 +114,7 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
 
       {openNew && (
         <div className=" flex items-center justify-center h-full top-0 left-0 fixed w-full bg-black bg-opacity-75">
-          <div className=" rounded-xl shadow-2xl bg-white w-11/12 lg:w-9/12 h-96 p-4 relative">
+          <div className=" rounded-xl shadow-2xl bg-white w-11/12 lg:w-9/12 h-auto py-8 px-4 relative">
             <p
               className="max-w-min  absolute end-4 top-4 text-red-700 cursor-pointer hover:opacity-75"
               onClick={() => setopenNew(false)}
@@ -119,40 +122,71 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
               X
             </p>
 
-            <p>{income === "Bills" ? "Nova Despesa" : "Novo Boleto"}</p>
+            <p className="text-xl">
+              {income === "Bills" ? "Nova Despesa" : "Novo Boleto"}
+            </p>
             <div className="flex  flex-col gap-4 flex-wrap">
               <div className="flex gap-0 lg:gap-4 flex-wrap">
-                <input
-                  type="text"
-                  className=" border text-white rounded-lg p-1 mt-4"
-                  placeholder="Descrição"
-                  name="description"
-                  onChange={(e) =>
-                    setNewPay(
-                      (prev) =>
-                        ({ ...prev, [e.target.name]: e.target.value } as newPay)
-                    )
-                  }
-                />
-                <input
-                  type="number"
-                  className="  text-white rounded-lg p-1 mt-4"
-                  placeholder="Custo"
-                  name="price"
-                  onChange={(e) =>
-                    setNewPay(
-                      (prev) =>
-                        ({ ...prev, [e.target.name]: e.target.value } as newPay)
-                    )
-                  }
-                />
+                <div className="flex flex-col mt-4 text-gray-700">
+                  <span>Descrição</span>
+                  <input
+                    type="text"
+                    className=" border text-gray-200 rounded-lg p-1 "
+                    name="description"
+                    onChange={(e) =>
+                      setNewPay(
+                        (prev) =>
+                          ({
+                            ...prev,
+                            [e.target.name]: e.target.value,
+                          } as newPay)
+                      )
+                    }
+                  />
+                </div>
 
+                <div className="flex flex-col mt-4">
+                  <span>Preço</span>
+                  <input
+                    type="number"
+                    className="  rounded-lg p-1 text-gray-200 "
+                    name="price"
+                    onChange={(e) =>
+                      setNewPay(
+                        (prev) =>
+                          ({
+                            ...prev,
+                            [e.target.name]: e.target.value,
+                          } as newPay)
+                      )
+                    }
+                  />
+                </div>
+
+                <div className="flex flex-col mt-4">
+                  <span>Data de Pagamento</span>
+                  <input
+                    type="date"
+                    className="  text-gray-200 rounded-lg p-1 "
+                    placeholder="Custo"
+                    name="date"
+                    onChange={(e) =>
+                      setNewPay(
+                        (prev) =>
+                          ({
+                            ...prev,
+                            [e.target.name]: e.target.value,
+                          } as newPay)
+                      )
+                    }
+                  />
+                </div>
                 {income === "Tickets" && <p>Todo</p>}
               </div>
 
               <textarea
                 placeholder="Observação"
-                className="w-64   text-white rounded-lg p-2"
+                className="w-64   text-gray-200 rounded-lg p-2"
                 name="observation"
                 onChange={(e) =>
                   setNewPay(
@@ -183,4 +217,5 @@ interface newPay {
   description: string;
   price: number;
   observation: string;
+  date: String;
 }
