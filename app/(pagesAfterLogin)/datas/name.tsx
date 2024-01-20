@@ -13,13 +13,7 @@ export default function NameOfClient() {
     }
   }, []);
 
-  return (
-    <div className="p-4 flex flex-col items-center justify-center">
-      <p>Olá, {name}</p>
-      <p>Seja bem vindo{"(a)"}!</p>
-      <Image src={gif} alt="animated gif" className="h-20 w-20 " />
-    </div>
-  );
+  return <p>Olá, {name}</p>;
 }
 
 export const justName = () => {
@@ -27,7 +21,6 @@ export const justName = () => {
   useEffect(() => {
     if (typeof window !== "undefined" && window.localStorage) {
       setName(localStorage.getItem("name"));
-      console.log("Name from localStorage:", name);
     } else {
       console.warn("localStorage is not available on the server side");
     }

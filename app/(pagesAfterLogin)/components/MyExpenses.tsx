@@ -1,27 +1,31 @@
 "use client";
 import { instance } from "@/app/axios/instance";
-import React, { ReactNode, useState } from "react";
+import React, { Dispatch, ReactNode, useState } from "react";
 import { BiHide } from "react-icons/bi";
 import { MdModeEditOutline } from "react-icons/md";
 import { MdDone } from "react-icons/md";
 import { justName } from "../datas/name";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import { fetchDataAndSetBills } from "../datas/takeBills";
 interface Expenses {
   text: string;
   span?: ReactNode;
   income: "Bills" | "Tickets";
+  setData: Dispatch<any>;
 }
-function MyExpenses({ text, span, income }: Expenses) {
+function MyExpenses({ text, span, income, setData }: Expenses) {
   const [openInput, setOpenInput] = useState(false);
   const [openNew, setopenNew] = useState(false);
   const [value, setValue] = useState("");
-  const name = justName();
-  console.log(name);
+  const [hide, setHide] = useState(true);
+  const [newPay, setNewPay] = useState<newPay>();
+  const myName = justName();
+
   const handleChangeNumberIncomeOrTickets = async () => {
     if (income === "Bills") {
       try {
         const res = await instance.put("/newIncomeBills", {
-          name,
+          name: myName,
           mensalIncomeBills: value,
         });
         setOpenInput(false);
@@ -33,7 +37,7 @@ function MyExpenses({ text, span, income }: Expenses) {
       if (income === "Tickets") {
         try {
           const res = await instance.put("/newIncomeTickets", {
-            name,
+            name: myName,
             mensalIncomeTickets: value,
           });
           localStorage.setItem("incomeTickets", value);
@@ -44,6 +48,17 @@ function MyExpenses({ text, span, income }: Expenses) {
       }
     }
   };
+
+  const newCost = async () => {
+    const res = await instance.put("newBill", {
+      userName: localStorage.getItem("name"),
+      name: newPay?.description,
+      price: newPay?.price,
+    });
+    setopenNew(false);
+    fetchDataAndSetBills(setData);
+    console.log(res);
+  };
   return (
     <div className="bg-white w-11/12 lg:w-9/12 rounded-2xl mt-10 p-2 lg:p-12">
       {!openInput && (
@@ -51,8 +66,12 @@ function MyExpenses({ text, span, income }: Expenses) {
           <h2> {text}</h2>
           <div className="flex gap-4 items-center">
             {" "}
-            <span className="">{span}</span>{" "}
-            <BiHide className="cursor-pointer" size={20} />
+            <span className={`${hide ? "blur-sm" : null}`}>{span}</span>{" "}
+            <BiHide
+              className="cursor-pointer"
+              size={20}
+              onClick={() => setHide(!hide)}
+            />
             <MdModeEditOutline
               className="cursor-pointer"
               size={20}
@@ -105,23 +124,47 @@ function MyExpenses({ text, span, income }: Expenses) {
               <div className="flex gap-0 lg:gap-4 flex-wrap">
                 <input
                   type="text"
-                  className="bg-gray-100 rounded-lg p-1 mt-4"
+                  className=" border text-white rounded-lg p-1 mt-4"
                   placeholder="Descrição"
+                  name="description"
+                  onChange={(e) =>
+                    setNewPay(
+                      (prev) =>
+                        ({ ...prev, [e.target.name]: e.target.value } as newPay)
+                    )
+                  }
                 />
                 <input
                   type="number"
-                  className="bg-gray-100 rounded-lg p-1 mt-4"
+                  className="  text-white rounded-lg p-1 mt-4"
                   placeholder="Custo"
+                  name="price"
+                  onChange={(e) =>
+                    setNewPay(
+                      (prev) =>
+                        ({ ...prev, [e.target.name]: e.target.value } as newPay)
+                    )
+                  }
                 />
+
+                {income === "Tickets" && <p>Todo</p>}
               </div>
 
               <textarea
                 placeholder="Observação"
-                className="w-64 bg-zinc-800 rounded-lg p-2"
+                className="w-64   text-white rounded-lg p-2"
+                name="observation"
+                onChange={(e) =>
+                  setNewPay(
+                    (prev) =>
+                      ({ ...prev, [e.target.name]: e.target.value } as newPay)
+                  )
+                }
               />
 
               <div className="flex justify-center mt-10">
                 <MdDone
+                  onClick={newCost}
                   className="bg-green-400 rounded-full text-green-100 cursor-pointer hover:bg-black transition-all"
                   size={80}
                 />
@@ -135,3 +178,9 @@ function MyExpenses({ text, span, income }: Expenses) {
 }
 
 export default MyExpenses;
+
+interface newPay {
+  description: string;
+  price: number;
+  observation: string;
+}

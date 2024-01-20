@@ -5,7 +5,7 @@ import { FaRegEdit } from "react-icons/fa";
 import IncomeTickets from "../datas/incomeTickets";
 function MySlips() {
   return (
-    <main className="flex flex-col  items-center h-screen w-full bg-gray-100">
+    <main className="flex flex-col  items-center h-screen w-full mt-10">
       <MyExpenses
         text="Meus boletos - Orçamento mensal de "
         income="Tickets"

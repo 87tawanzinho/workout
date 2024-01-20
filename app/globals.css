@@ -6,7 +6,18 @@ body,
 html,
 :root {
   transition: all;
-  color: rgb(44, 44, 44);
+  color: rgb(39, 39, 39);
+  background: #e0dedd9c;
+}
+
+input,
+textarea {
+  background: #18181b;
+}
+
+.bg-nav {
+  background: #131313;
+  color: rgb(241, 241, 241);
 }
 
 .bg-home {

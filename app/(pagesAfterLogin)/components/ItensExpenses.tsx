@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 
 interface ItensExpenses {
   data: ReactNode;
-  total: string;
+  total: number;
   type: "Bills" | "Tickets";
 }
 function ItensExpenses({ data, total, type }: ItensExpenses) {
@@ -10,8 +10,12 @@ function ItensExpenses({ data, total, type }: ItensExpenses) {
     <div className="bg-white w-11/12 lg:w-9/12 rounded-2xl  mt-10 h-full p-8 ">
       {data}
 
-      <div className="mt-10 pb-2">
-        Total do mês: <span className="text-green-700"> {total}</span>
+      <div className="mt-10 pb-2 text-xl">
+        Total do mês: R${" "}
+        <span className={`${total <= -1 ? "text-red-700" : "text-green-700"}`}>
+          {" "}
+          {total}
+        </span>
       </div>
     </div>
   );

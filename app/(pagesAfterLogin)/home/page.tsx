@@ -1,34 +1,48 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { BiHide } from "react-icons/bi";
 import MyExpenses from "../components/MyExpenses";
 import ItensExpenses from "../components/ItensExpenses";
-import { FaRegEdit } from "react-icons/fa";
-import NameOfClient from "../datas/name";
-import IncomeBills from "../datas/incomeBills";
+import NameOfClient, { justName } from "../datas/name";
+import IncomeBills, { incomeBillValue } from "../datas/incomeBills";
+import { fetchDataAndSetBills } from "../datas/takeBills";
 
 function PageHome() {
+  const [bills, setBills] = useState<myBills[]>([]);
+
+  useEffect(() => {
+    fetchDataAndSetBills(setBills);
+  }, []);
   return (
     <div className=" h-screen px-0 lg:px-24 pt-10">
-      <div className=" bg-white h-auto lg:h-60  w-full lg:w-60  p-8 ml-0 lg:ml-40 mt-4 lg:mt-10  rounded-lg  flex ">
-        <NameOfClient />
-      </div>
-
       <main className="flex flex-col  items-center w-full">
         <MyExpenses
           text={" Minhas Despesas - Renda Mensal"}
           income="Bills"
+          setData={setBills}
           span={<IncomeBills />}
         />
         <ItensExpenses
           type="Bills"
           data={
-            <div className="flex justify-between">
-              <p>Meu Salario</p>
-              <p className="text-red-700">-R$ 3,000</p>
-              <FaRegEdit size={20} className="text-yellow-700 cursor-pointer" />
-            </div>
+            <>
+              {bills.length > 0 ? (
+                bills.map((bill) => (
+                  <div className="flex justify-between ">
+                    <p className="w-40 mb-4 border-b-2 shadow-lg">
+                      {bill.name}
+                    </p>
+                    <p className="text-red-700 w-20">-R$ {bill.price}</p>
+                  </div>
+                ))
+              ) : (
+                <p>Ainda não há nada aqui</p>
+              )}
+            </>
           }
-          total="RS$ 3,000"
+          total={
+            incomeBillValue() - bills.reduce((acc, bill) => acc + bill.price, 0)
+          }
         />
       </main>
     </div>
@@ -36,3 +50,8 @@ function PageHome() {
 }
 
 export default PageHome;
+
+interface myBills {
+  name: string;
+  price: number;
+}
