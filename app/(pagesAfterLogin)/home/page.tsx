@@ -4,12 +4,17 @@ import MyExpenses from "../components/MyExpenses";
 import ItensExpenses from "../components/ItensExpenses";
 import NameOfClient, { justName } from "../datas/name";
 import IncomeBills, { incomeBillValue } from "../datas/incomeBills";
+import { format, isToday, parseISO } from "date-fns";
+import { utcToZonedTime, zonedTimeToUtc } from "date-fns-tz";
+
 import { fetchDataAndSetBills } from "../datas/takeBills";
 import { BiEdit } from "react-icons/bi";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { instance } from "@/app/axios/instance";
+import { CiWarning } from "react-icons/ci";
 
 function PageHome() {
+  const timeZone = "America/Sao_Paulo";
   const [bills, setBills] = useState<myBills[]>([]);
 
   useEffect(() => {
@@ -21,6 +26,7 @@ function PageHome() {
       const userName = localStorage.getItem("name");
       const res = await instance.put(`deleteOneBill/${userName}`, { id });
       console.log(res);
+      fetchDataAndSetBills(setBills);
     } catch (error) {
       console.log(error);
     }
@@ -36,22 +42,44 @@ function PageHome() {
         />
         <ItensExpenses
           type="Bills"
+          payToday={
+            <>
+              {bills.map((bill) => (
+                <div key={bill._id}>
+                  {isToday(parseISO(bill.date)) ? (
+                    <div className="rounded-2xl mb-10 border-b-4 shadow-2xl border-red-200 pb-4">
+                      <p className="flex gap-2 items-center mb-4">
+                        {" "}
+                        <CiWarning size={40} className="text-red-600" /> -
+                        Contas para pagar hoje
+                      </p>
+                      <div className="flex gap-4 text-gray-800 px-2">
+                        <p>{bill.name}</p>
+                        <p>{format(parseISO(bill.date), "dd/MM/yyyy ", {})}</p>
+                        <p>R${bill.price}</p>
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              ))}
+            </>
+          }
           data={
             <>
               {bills.length > 0 ? (
                 bills.map((bill) => (
                   <div
-                    className="flex justify-between items-center"
+                    className="flex justify-between items-center mt-2 text-sm"
                     key={bill._id}
                   >
-                    <p className="w-40 mb-4 border-b-2 shadow-lg">
+                    <p className="  border-b-2 shadow-lg w-30 lg:w-40">
                       {bill.name}
                     </p>
-                    <div className=" overflow-auto">
-                      <p>{bill.date}</p>
+                    <div className=" overflow-auto w-30 ">
+                      <p> {format(parseISO(bill.date), "dd/MM/yyyy ", {})}</p>
                     </div>
                     <div className="flex gap-2">
-                      <p className="text-red-700 overflow-auto w-20">
+                      <p className="text-red-700 overflow-auto ">
                         -R$ {bill.price}
                       </p>
                       <FaDeleteLeft
