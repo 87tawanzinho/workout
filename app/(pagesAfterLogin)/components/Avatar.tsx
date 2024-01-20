@@ -1,8 +1,11 @@
 import Image from "next/image";
 import React from "react";
-import avatar from "@/public/avatar.png";
+import { CgProfile } from "react-icons/cg";
+
 function Avatar() {
-  return <Image src={avatar} alt="avatar" />;
+  return (
+    <CgProfile size={30} className="text-black bg-gray-200 rounded-full" />
+  );
 }
 
 export default Avatar;

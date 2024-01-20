@@ -16,7 +16,9 @@ function PageHome() {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (localStorage.getItem("nome")) {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 400);
     } else {
       setLoading(true);
     }

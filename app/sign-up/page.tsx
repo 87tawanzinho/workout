@@ -2,19 +2,20 @@
 import React, { useState } from "react";
 import { GiBurningBook } from "react-icons/gi";
 import { instance } from "../axios/instance";
+import { useRouter } from "next/navigation";
 function SignUpPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const router = useRouter();
   const handleSignUp = async () => {
     if (password !== confirmPassword) {
       return alert("Erro, verifique");
     }
     try {
       const res = await instance.post("", { email, name, password }); // cria um usuario
-      console.log(res);
+      router.push("/");
     } catch (e) {
       console.error(e);
     }

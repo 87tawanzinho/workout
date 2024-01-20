@@ -18,7 +18,7 @@ function MenuPC() {
           href={"/home"}
           className={`${
             path === "/home" && "border-b-2 border-green-200 rounded"
-          } hover:text-yellow-400`}
+          } hover:text-green-100`}
         >
           despesas gerais
         </Link>
@@ -26,7 +26,7 @@ function MenuPC() {
           href={"/slip"}
           className={`${
             path === "/slip" && "border-b-2 border-green-200 rounded"
-          } hover:text-yellow-400`}
+          } hover:text-green-100`}
         >
           boletos
         </Link>
