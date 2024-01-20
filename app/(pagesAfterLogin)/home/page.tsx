@@ -27,6 +27,15 @@ function PageHome() {
     <>
       {loading ? (
         <div className=" h-full px-0 lg:px-24 pt-10">
+          <div className="flex justify-center ">
+            <div className="typewriter shadow-2xl p-4 rounded-lg ">
+              <div className="slide">
+                <i></i>
+              </div>
+              <div className="paper"></div>
+              <div className="keyboard"></div>
+            </div>
+          </div>
           <main className="flex flex-col  items-center w-full">
             <MyExpenses
               text={" Minhas Despesas - Renda Mensal"}

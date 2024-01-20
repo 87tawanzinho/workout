@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 function MenuPC() {
   const path = usePathname();
   return (
-    <nav className="hidden fixed lg:flex lg:flex-row-reverse bg-nav justify-between px-24 p-4 items-center w-full top-0  text-gray-100">
+    <nav className="hidden fixed lg:flex z-50  lg:flex-row-reverse bg-nav justify-between px-24 p-4 items-center w-full top-0  text-gray-100">
       <div className="flex gap-8 items-center">
         <div className="flex items-center gap-4">
           <Avatar />
