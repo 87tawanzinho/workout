@@ -1,5 +1,4 @@
 "use client";
-import axios from "axios";
 import React, { useState } from "react";
 import { GiBurningBook } from "react-icons/gi";
 import { instance } from "../axios/instance";

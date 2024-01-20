@@ -9,7 +9,7 @@ function MenuMobile() {
   const name = justName();
   const [openMenu, setOpenMenu] = useState(false);
   return (
-    <nav className="flex fixed lg:hidden px-2 bg-nav p-2  justify-between items-center text-xl w-full top-0  ">
+    <nav className="flex fixed lg:hidden px-2 bg-nav p-2  justify-between items-center text-xl w-full top-0 z-50 ">
       <h2 className="font-sans italic">Monify</h2>
       <IoMdMenu size={40} onClick={() => setOpenMenu(true)} />
 

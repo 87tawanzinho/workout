@@ -7,6 +7,8 @@ import { MdDone } from "react-icons/md";
 import { justName } from "../datas/name";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { fetchDataAndSetBills } from "../datas/takeBills";
+import { PageWrapper } from "../emotion/page-wrapper";
+import { PageWrapperModal } from "../emotion/page-wrapperModal";
 interface Expenses {
   text: string;
   span?: ReactNode;
@@ -113,99 +115,101 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
       )}
 
       {openNew && (
-        <div className=" flex items-center justify-center h-full top-0 left-0 fixed w-full bg-black bg-opacity-75">
-          <div className=" rounded-xl shadow-2xl bg-white w-11/12 lg:w-9/12 h-auto py-8 px-4 relative">
-            <p
-              className="max-w-min  absolute end-4 top-4 text-red-700 cursor-pointer hover:opacity-75"
-              onClick={() => setopenNew(false)}
-            >
-              X
-            </p>
+        <PageWrapperModal>
+          <div className=" flex items-center justify-center h-full top-0 left-0 fixed w-full bg-black bg-opacity-75">
+            <div className=" rounded-xl shadow-2xl bg-white w-11/12 lg:w-9/12 h-auto py-8 px-4 relative">
+              <p
+                className="max-w-min  absolute end-4 top-4 text-red-700 cursor-pointer hover:opacity-75"
+                onClick={() => setopenNew(false)}
+              >
+                X
+              </p>
 
-            <p className="text-xl">
-              {income === "Bills" ? "Nova Despesa" : "Novo Boleto"}
-            </p>
-            <div className="flex  flex-col gap-4 flex-wrap">
-              <div className="flex gap-0 lg:gap-4 flex-wrap">
-                <div className="flex flex-col mt-4 text-gray-700">
-                  <span>Descrição</span>
-                  <input
-                    type="text"
-                    className="  "
-                    name="description"
-                    onChange={(e) =>
-                      setNewPay(
-                        (prev) =>
-                          ({
-                            ...prev,
-                            [e.target.name]: e.target.value,
-                          } as newPay)
-                      )
-                    }
-                  />
+              <p className="text-xl">
+                {income === "Bills" ? "Nova Despesa" : "Novo Boleto"}
+              </p>
+              <div className="flex  flex-col gap-4 flex-wrap">
+                <div className="flex gap-0 lg:gap-4 flex-wrap">
+                  <div className="flex flex-col mt-4 text-gray-700">
+                    <span>Descrição</span>
+                    <input
+                      type="text"
+                      className="  "
+                      name="description"
+                      onChange={(e) =>
+                        setNewPay(
+                          (prev) =>
+                            ({
+                              ...prev,
+                              [e.target.name]: e.target.value,
+                            } as newPay)
+                        )
+                      }
+                    />
+                  </div>
+
+                  <div className="flex flex-col mt-4">
+                    <span>Preço</span>
+                    <input
+                      type="number"
+                      className="  "
+                      name="price"
+                      onChange={(e) =>
+                        setNewPay(
+                          (prev) =>
+                            ({
+                              ...prev,
+                              [e.target.name]: e.target.value,
+                            } as newPay)
+                        )
+                      }
+                    />
+                  </div>
+
+                  <div className="flex flex-col mt-4">
+                    <span>Data de Pagamento</span>
+                    <input
+                      type="date"
+                      className=" "
+                      placeholder="Custo"
+                      name="date"
+                      onChange={(e) =>
+                        setNewPay(
+                          (prev) =>
+                            ({
+                              ...prev,
+                              [e.target.name]: e.target.value,
+                            } as newPay)
+                        )
+                      }
+                    />
+                  </div>
+                  {income === "Tickets" && <p>Todo</p>}
                 </div>
 
-                <div className="flex flex-col mt-4">
-                  <span>Preço</span>
-                  <input
-                    type="number"
-                    className="  "
-                    name="price"
-                    onChange={(e) =>
-                      setNewPay(
-                        (prev) =>
-                          ({
-                            ...prev,
-                            [e.target.name]: e.target.value,
-                          } as newPay)
-                      )
-                    }
-                  />
-                </div>
-
-                <div className="flex flex-col mt-4">
-                  <span>Data de Pagamento</span>
-                  <input
-                    type="date"
-                    className=" "
-                    placeholder="Custo"
-                    name="date"
-                    onChange={(e) =>
-                      setNewPay(
-                        (prev) =>
-                          ({
-                            ...prev,
-                            [e.target.name]: e.target.value,
-                          } as newPay)
-                      )
-                    }
-                  />
-                </div>
-                {income === "Tickets" && <p>Todo</p>}
-              </div>
-
-              <textarea
-                placeholder="Observação"
-                className="w-64  "
-                name="observation"
-                onChange={(e) =>
-                  setNewPay(
-                    (prev) =>
-                      ({ ...prev, [e.target.name]: e.target.value } as newPay)
-                  )
-                }
-              />
-
-              <div className="flex justify-center mt-10">
-                <MdDone
-                  onClick={newCost}
-                  className="bg-green-400 rounded-full text-green-100 cursor-pointer hover:bg-black transition-all"
-                  size={80}
+                <textarea
+                  placeholder="Observação"
+                  className="w-64  "
+                  name="observation"
+                  onChange={(e) =>
+                    setNewPay(
+                      (prev) =>
+                        ({ ...prev, [e.target.name]: e.target.value } as newPay)
+                    )
+                  }
                 />
+
+                <div className="flex justify-center mt-10">
+                  <MdDone
+                    onClick={newCost}
+                    className="bg-green-400 rounded-full text-green-100 cursor-pointer hover:bg-black transition-all"
+                    size={80}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </PageWrapperModal>
       )}
     </div>
   );
