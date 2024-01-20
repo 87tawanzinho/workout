@@ -11,10 +11,11 @@ export const PageWrapperModal = ({
     <>
       <AnimatePresence>
         <motion.div
+          className="w-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ delay: 0.01, ease: "easeOut" }}
+          transition={{ delay: 0.01, ease: "easeInOut" }}
         >
           {children}
         </motion.div>
