@@ -71,17 +71,17 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
               {span}
             </span>{" "}
             <BiHide
-              className="cursor-pointer"
+              className="cursor-pointer hover:opacity-75"
               size={20}
               onClick={() => setHide(!hide)}
             />
             <MdModeEditOutline
-              className="cursor-pointer"
+              className="cursor-pointer hover:opacity-75"
               size={20}
               onClick={() => setOpenInput(true)}
             />
             <IoMdAddCircleOutline
-              className="text-red-700 cursor-pointer"
+              className="text-red-700 cursor-pointer heart hover:opacity-75"
               size={20}
               onClick={() => setopenNew(true)}
             />
@@ -131,7 +131,7 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
                   <span>Descrição</span>
                   <input
                     type="text"
-                    className=" border text-gray-200 rounded-lg p-1 "
+                    className="  "
                     name="description"
                     onChange={(e) =>
                       setNewPay(
@@ -149,7 +149,7 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
                   <span>Preço</span>
                   <input
                     type="number"
-                    className="  rounded-lg p-1 text-gray-200 "
+                    className="  "
                     name="price"
                     onChange={(e) =>
                       setNewPay(
@@ -167,7 +167,7 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
                   <span>Data de Pagamento</span>
                   <input
                     type="date"
-                    className="  text-gray-200 rounded-lg p-1 "
+                    className=" "
                     placeholder="Custo"
                     name="date"
                     onChange={(e) =>
@@ -186,7 +186,7 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
 
               <textarea
                 placeholder="Observação"
-                className="w-64   text-gray-200 rounded-lg p-2"
+                className="w-64  "
                 name="observation"
                 onChange={(e) =>
                   setNewPay(

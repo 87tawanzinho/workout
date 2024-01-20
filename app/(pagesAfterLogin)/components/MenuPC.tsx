@@ -31,7 +31,7 @@ function MenuPC() {
           boletos
         </Link>
       </div>
-      <p>Bancos & Cia</p>
+      <p className="text-xl font-sans italic">Monify</p>
     </nav>
   );
 }

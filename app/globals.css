@@ -12,12 +12,14 @@ html,
 }
 
 input[type="date"] {
-  background: rgb(135, 190, 130);
+  background: rgb(243, 243, 243);
 }
 
 input,
 textarea {
-  background: #18181b;
+  background: #ffffff;
+  border: 2px solid #c0f8c9;
+  border-radius: 2px;
 }
 
 .bg-nav {
@@ -38,4 +40,24 @@ body:hover,
 html:hover,
 :root:hover {
   transition: all;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+    background: none;
+  }
+  50% {
+    transform: scale(1.4);
+  }
+
+  10% {
+    background-color: rgba(255, 0, 0, 0.7);
+  }
+}
+
+.heart {
+  border-radius: 100%;
+  animation: heartbeat 2.4s infinite;
 }
