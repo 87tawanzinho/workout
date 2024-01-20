@@ -4,7 +4,7 @@ import MenuPC from "./components/MenuPC";
 
 function HomeLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className=" h-full">
+    <div className=" ">
       <MenuPC />
       <MenuMobile />
 

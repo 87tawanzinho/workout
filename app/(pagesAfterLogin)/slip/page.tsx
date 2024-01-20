@@ -6,10 +6,11 @@ import IncomeTickets from "../datas/incomeTickets";
 function MySlips() {
   return (
     <main className="flex flex-col  items-center h-screen w-full mt-10">
-      <MyExpenses
+      {/* <MyExpenses
         text="Meus boletos - Orçamento mensal de "
         income="Tickets"
         span={<IncomeTickets />}
+        setData={todo}
       />
       <ItensExpenses
         data={
@@ -20,7 +21,7 @@ function MySlips() {
           </div>
         }
         total="R$ 4,000"
-      />
+      /> */}
     </main>
   );
 }

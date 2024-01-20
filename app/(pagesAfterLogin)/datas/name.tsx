@@ -7,11 +7,14 @@ export default function NameOfClient() {
   useEffect(() => {
     if (typeof window !== "undefined" && window.localStorage) {
       setName(localStorage.getItem("name"));
-      console.log("Name from localStorage:", name);
     } else {
       console.warn("localStorage is not available on the server side");
     }
   }, []);
+
+  if (!name) {
+    return <p className="blur-sm">cliente</p>;
+  }
 
   return <p>Olá, {name}</p>;
 }

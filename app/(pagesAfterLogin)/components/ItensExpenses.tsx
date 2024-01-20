@@ -12,8 +12,8 @@ interface ItensExpenses {
 function ItensExpenses({ data, total, type, payToday }: ItensExpenses) {
   const [info, setInfo] = useState(false);
   return (
-    <div className="bg-white w-11/12 lg:w-9/12 rounded-2xl  mt-10 h-full p-8 ">
-      {payToday}
+    <div className="bg-white w-full lg:w-9/12 rounded-2xl  mt-10 h-full p-4 ">
+      <div className="bg-green-200 rounded-lg ">{payToday}</div>
       {data}
       <div className="mt-10 pb-2 text-xl flex items-center gap-4">
         <div>
