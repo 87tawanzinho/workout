@@ -24,7 +24,7 @@ export default function Home() {
       localStorage.setItem("name", tokenDecode.name);
       localStorage.setItem("incomeBills", tokenDecode.mensalIncomeBills);
       localStorage.setItem("incomeTickets", tokenDecode.mensalIncomeTickets);
-      setWarning("");
+      setWarning("Sucesso!");
       router.push("/home");
     } catch (e) {
       setWarning("Algo de errado, verifique.");

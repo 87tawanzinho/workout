@@ -18,7 +18,7 @@ function SignUpPage() {
     }
     try {
       await instance.post("", { email, name, password }); // cria um usuario
-      setWarning("");
+      setWarning("Sucesso!");
       router.push("/");
     } catch (e) {
       setWarning("Tente novamente mais tarde.");

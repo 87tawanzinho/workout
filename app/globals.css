@@ -20,7 +20,10 @@ input,
 textarea {
   background: #ffffff;
   border: 2px solid #7dd3fc;
+  padding: 2px;
   border-radius: 2px;
+  padding-left: 8px;
+  color: #5e5e5e;
 }
 
 .bg-nav {
