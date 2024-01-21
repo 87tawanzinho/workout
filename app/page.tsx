@@ -9,10 +9,11 @@ export default function Home() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [warning, setWarning] = useState("");
   const [error, setError] = useState("");
 
   const handleSignUp = async () => {
-    setError("");
+    setWarning("Estamos tentando...");
     try {
       const res = await instance.post("login", {
         name,
@@ -23,56 +24,49 @@ export default function Home() {
       localStorage.setItem("name", tokenDecode.name);
       localStorage.setItem("incomeBills", tokenDecode.mensalIncomeBills);
       localStorage.setItem("incomeTickets", tokenDecode.mensalIncomeTickets);
-      setError("");
+      setWarning("");
       router.push("/home");
     } catch (e) {
-      setError("Algo de errado, verifique.");
+      setWarning("Algo de errado, verifique.");
       console.error(e);
     }
   };
 
   return (
-    <main className="flex flex-col bg-home">
-      <div className="flex flex-col lg:flex-row justify-center items-center min-h-screen gap-8 ">
-        <h2 className="text-xl lg:text-4xl shadow-2xl w-64 lg:w-96 text-center border-b-4 p-4 border-purple-400">
-          Hoje é o dia de pagar as{" "}
-          <span className="text-green-400">contas</span> ?
-        </h2>
-        <div className="flex flex-col gap-4 rounded">
-          <input
-            type="text"
-            placeholder="E-mail"
-            className="p-2"
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Senha"
-            className="p-2 "
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button
-            onClick={handleSignUp}
-            className="bg-green-400 font-bold rounded p-2 text-zinc-900  border-b-2 hover:bg-red-400 transition-all"
-          >
-            Entrar
-          </button>
-          {error && error}
-          <Link href={"/sign-up"}>
-            <p className="text-yellow-400 text-end hover:border-b-2  cursor-pointer">
-              Não tenho uma conta
-            </p>
-          </Link>
-        </div>
+    <main className="flex flex-col justify-center items-center h-full py-8 ">
+      <div className="text-center">
+        <h2 className="text-4xl">Monify</h2>
+        <p>a melhor forma de organizar suas contas</p>
       </div>
 
-      <div className="p-4 lg:p-24 flex flex-col gap-10">
-        <p className="text-xl lg:text-4xl shadow-2xl border-r-4">
-          Organize a suas contas
-        </p>
-        <p className="text-end text-lg lg:text-4xl border-l-4 mt-4">
-          E viva despreocupado
-        </p>
+      <div className="h-80 w-11/12 lg:w-7/12 border-b-2 shadow-2xl mt-4 flex flex-col justify-center items-center">
+        <div>
+          <p>Usuário</p>
+          <input type="text" onChange={(e) => setName(e.target.value)} />
+        </div>
+
+        <div>
+          <p>Senha</p>
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        <button
+          className="bg-black text-white p-1 w-32 mt-4 hover:opacity-75"
+          onClick={handleSignUp}
+        >
+          Entrar
+        </button>
+
+        {warning && <p className="text-sm">{warning}</p>}
+
+        <Link href={"/sign-up"}>
+          <p className="text-gray-700 mt-4 border-b-2 border-gray-700 hover:opacity-75">
+            Se cadastrar
+          </p>
+        </Link>
       </div>
     </main>
   );

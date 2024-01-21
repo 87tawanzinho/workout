@@ -3,66 +3,80 @@ import React, { useState } from "react";
 import { GiBurningBook } from "react-icons/gi";
 import { instance } from "../axios/instance";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 function SignUpPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [warning, setWarning] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
   const handleSignUp = async () => {
+    setWarning("Tentando criar sua conta..");
     if (password !== confirmPassword) {
-      return alert("Erro, verifique");
+      return setWarning("Erro, verifique");
     }
     try {
-      const res = await instance.post("", { email, name, password }); // cria um usuario
+      await instance.post("", { email, name, password }); // cria um usuario
+      setWarning("");
       router.push("/");
     } catch (e) {
-      console.error(e);
+      setWarning("Tente novamente mais tarde.");
     }
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-12 justify-center items-center min-h-screen bg-home ">
-      <div className="flex  items-center justify-center gap-4 text-2xl">
-        <p className="text-lg">O melhor jeito de se preparar</p>
-        <GiBurningBook size={60} />
+    <main className="flex flex-col justify-center items-center h-full  ">
+      <div className="text-center">
+        <h2 className="text-4xl">Monify</h2>
+        <p>Seja bem vindo!</p>
       </div>
-      <div className="flex flex-col gap-4 rounded">
-        <input
-          type="text"
-          placeholder="Nome"
-          className="p-2"
-          onChange={(e) => setName(e.target.value)}
-        />
 
-        <input
-          type="text"
-          placeholder="E-mail"
-          className="p-2"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+      <div className="h-96  mt-4 w-11/12 lg:w-7/12 border-b-2 shadow-2xl  flex flex-col justify-center items-center">
+        <div className="">
+          <p>E-mail</p>
+          <input type="text" onChange={(e) => setEmail(e.target.value)} />
+        </div>
 
-        <input
-          type="password"
-          placeholder="Senha"
-          className="p-2"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div>
+          <p>Usuário</p>
+          <input type="text" onChange={(e) => setName(e.target.value)} />
+        </div>
 
-        <input
-          type="password"
-          placeholder="Confirmar Senha"
-          className="p-2"
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
+        <div>
+          <p>Senha</p>
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <p>Confirmar Senha</p>
+          <input
+            type="password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </div>
+
         <button
+          className="bg-black text-white p-1 w-32 mt-4 hover:opacity-75"
           onClick={handleSignUp}
-          className="bg-yellow-400 rounded p-2 text-black font-bold hover:bg-green-400 transition-all"
         >
-          Criar uma nova conta
+          Entrar
         </button>
+
+        {warning && <p className="text-sm mt-2">{warning}</p>}
+
+        <div className="">
+          <Link href={"/"}>
+            <p className="text-gray-700 mt-4 border-b-2 border-gray-700 hover:opacity-75 ">
+              Tela de Login
+            </p>
+          </Link>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
 

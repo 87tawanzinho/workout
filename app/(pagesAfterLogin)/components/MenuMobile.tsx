@@ -37,6 +37,18 @@ function MenuMobile() {
                 >
                   Despesas
                 </Link>
+
+                <Link
+                  href={"/"}
+                  className="border-b-2 shadow-lg mt-4"
+                  onClick={() => {
+                    localStorage.removeItem("name");
+                    localStorage.removeItem("incomeBills");
+                    localStorage.removeItem("incomeTickets");
+                  }}
+                >
+                  Sair
+                </Link>
               </div>
             </div>
           </PageWrapperModal>

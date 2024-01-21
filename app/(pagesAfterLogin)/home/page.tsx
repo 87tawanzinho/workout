@@ -17,6 +17,7 @@ function PageHome() {
   const [bills, setBills] = useState<myBills[]>([]);
   const [incomeBill, setIncomeBill] = useState<number>(0);
   const [name, setName] = useState<string>("");
+  const [warning, setWarning] = useState(false);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -95,10 +96,12 @@ function PageHome() {
                          items-center mt-2 text-sm   "
                         key={bill._id}
                       >
+                        {warning && <Loading />}
                         <div
                           className="w-1/3 lg:w-1/4 overflow-auto hover:bg-opacity-20
                           hover:text-black hover:bg-sky-400 cursor-pointer  "
                           onClick={() => {
+                            setWarning(true);
                             router.push(`home/${bill._id}?name=${name}`);
                           }}
                         >

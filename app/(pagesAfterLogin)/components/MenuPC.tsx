@@ -14,14 +14,29 @@ function MenuPC() {
           <Avatar />
           <NameOfClient />
         </div>
-        <Link
-          href={"/home"}
-          className={`${
-            path === "/home" && "border-b-2 border-gray-100  rounded"
-          } hover:text-green-100`}
-        >
-          despesas gerais
-        </Link>
+        <div>
+          <Link
+            href={"/home"}
+            className={`${
+              path === "/home" && "border-b-2 border-gray-100  rounded"
+            } hover:text-green-100`}
+          >
+            despesas gerais
+          </Link>
+        </div>
+        <div>
+          <Link
+            href={"/"}
+            className=""
+            onClick={() => {
+              localStorage.removeItem("name");
+              localStorage.removeItem("incomeBills");
+              localStorage.removeItem("incomeTickets");
+            }}
+          >
+            Sair
+          </Link>
+        </div>
       </div>
       <p className="text-xl font-sans italic">Monify</p>
     </nav>
