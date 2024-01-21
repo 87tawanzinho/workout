@@ -37,13 +37,6 @@ function MenuMobile() {
                 >
                   Despesas
                 </Link>
-                <Link
-                  href={"/slip"}
-                  className="mt-10 border-b-2 shadow-lg"
-                  onClick={() => setOpenMenu(false)}
-                >
-                  Boletos
-                </Link>
               </div>
             </div>
           </PageWrapperModal>

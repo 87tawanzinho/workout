@@ -34,7 +34,7 @@ function page({ params }: { params: { myBill: string } }) {
     <>
       {informationsAboutThisBill ? (
         <div className="flex flex-col justify-center items-center pt-40">
-          <div className="border-b-2 border-gray-400 shadow-2xl  w-11/12 p-4">
+          <div className=" border-gray-400 shadow-2xl  w-11/12 p-4">
             <div className="flex justify-center p-4">
               <GiPayMoney size={100} />
             </div>
@@ -74,7 +74,7 @@ function page({ params }: { params: { myBill: string } }) {
               <FaArrowDown />
             </div>
 
-            <div className="border-2 shadow-2xl border-gray-200 bg-zinc-800 text-gray-200 rounded-lg p-2 w-full lg:w-80 mt-4">
+            <div className="  bg-gray-300 text-zinc-800  rounded-lg p-2 w-full lg:w-80 mt-4">
               <p className="break-words">
                 {informationsAboutThisBill!!.observation}
               </p>

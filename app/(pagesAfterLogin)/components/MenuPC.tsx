@@ -17,18 +17,10 @@ function MenuPC() {
         <Link
           href={"/home"}
           className={`${
-            path === "/home" && "border-b-2 border-green-200 rounded"
+            path === "/home" && "border-b-2 border-gray-100  rounded"
           } hover:text-green-100`}
         >
           despesas gerais
-        </Link>
-        <Link
-          href={"/slip"}
-          className={`${
-            path === "/slip" && "border-b-2 border-green-200 rounded"
-          } hover:text-green-100`}
-        >
-          boletos
         </Link>
       </div>
       <p className="text-xl font-sans italic">Monify</p>

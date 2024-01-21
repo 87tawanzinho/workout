@@ -11,6 +11,7 @@ import { CiWarning } from "react-icons/ci";
 import { removeBill } from "../datas/removeBill";
 import Loading from "../loading";
 import { useRouter } from "next/navigation";
+import Slips from "../components/slips";
 
 function PageHome() {
   const [bills, setBills] = useState<myBills[]>([]);
@@ -26,13 +27,16 @@ function PageHome() {
     ) {
       setIncomeBill(parseFloat(localStorage.getItem("incomeBills") as any));
       bills = localStorage.getItem("incomeBills");
+      setTimeout(() => {
+        setLoading(false);
+      }, 600);
       setName(localStorage.getItem("name")!!);
     }
     fetchDataAndSetBills(setBills);
   }, [bills]);
   return (
     <>
-      {loading ? (
+      {loading === false ? (
         <div className=" h-full  pt-10 w-full flex flex-col ">
           <div className="flex justify-center items-center    ">
             <div className="typewriter shadow-2xl p-4 rounded-lg ">
@@ -131,13 +135,8 @@ function PageHome() {
               }
             />
           </main>
-          // TODO
-          <div className="px-4 lg:px-60 pb-10 ">
-            <div className="mt-20 p-2 w-full rounded-2xl lg:w-80 h-48 border-2 shadow-2xl    ">
-              {" "}
-              <p>Meus Boletos</p>
-            </div>
-          </div>
+
+          <Slips />
         </div>
       ) : (
         <Loading />

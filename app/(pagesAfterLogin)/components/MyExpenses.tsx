@@ -93,7 +93,7 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
     }
   };
   return (
-    <div className="border-2 shadow-2xl w-11/12 lg:w-7/12 rounded-2xl mt-10 p-2 lg:p-12">
+    <div className="bg-white w-11/12 lg:w-7/12 rounded-2xl mt-10 p-2 lg:p-12">
       {!openInput && (
         <PageWrapper>
           <div className="text-sm lg:text-lg  flex flex-col lg:flex-row gap-2 items-center">
