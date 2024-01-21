@@ -5,11 +5,11 @@ import { PageWrapper } from "./emotion/page-wrapper";
 
 function HomeLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className=" ">
+    <div className="">
       <MenuPC />
       <MenuMobile />
       <PageWrapper>
-        <div className="mt-20">{children}</div>
+        <div className="pt-20">{children}</div>
       </PageWrapper>
     </div>
   );

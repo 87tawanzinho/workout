@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Roboto, Roboto_Slab } from "next/font/google";
+import { Inter, Open_Sans, Roboto, Roboto_Slab } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], weight: ["500"] });
+const inter = Open_Sans({ subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",

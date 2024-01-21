@@ -10,7 +10,6 @@ export const removeBill = async (
   try {
     const userName = localStorage.getItem("name");
     const res = await instance.put(`deleteOneBill/${userName}`, { id });
-    console.log(res);
     fetchDataAndSetBills(setBills);
   } catch (error) {
     console.log(error);

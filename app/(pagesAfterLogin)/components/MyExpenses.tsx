@@ -11,6 +11,8 @@ import { PageWrapper } from "../emotion/page-wrapper";
 import { PageWrapperModal } from "../emotion/page-wrapperModal";
 import { IoCheckmark } from "react-icons/io5";
 import { CgClose } from "react-icons/cg";
+import { ImInfo } from "react-icons/im";
+import HowWorksThis from "./HowWorksTotal";
 interface Expenses {
   text: string;
   span?: ReactNode;
@@ -21,6 +23,7 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
   const [openInput, setOpenInput] = useState(false);
   const [openNew, setopenNew] = useState(false);
   const [value, setValue] = useState("");
+  const [info, setOpenInfo] = useState(false);
   const [warning, setWarning] = useState("");
   const [hide, setHide] = useState(true);
   const [warningIncome, setWarningIncome] = useState("");
@@ -58,6 +61,20 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
   };
 
   const newCost = async () => {
+    if (!newPay?.description || !newPay?.price || !newPay?.date) {
+      return setWarning("Preencha todos os campos para prosseguir.");
+    }
+
+    if (newPay.description.length <= 3 || newPay.description.length > 12) {
+      return setWarning(
+        "A descrição tem que ter no minimo 4 dígitos e no maximo 12."
+      );
+    }
+
+    if (newPay.price <= 0) {
+      return setWarning("O preço precisa ser maior que 0.");
+    }
+
     setWarning("Aguarde, estamos registrando..");
     try {
       const res = await instance.put("newBill", {
@@ -65,6 +82,7 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
         name: newPay?.description,
         price: newPay?.price,
         date: newPay?.date,
+        observation: newPay?.observation,
       });
       setWarning("");
       setopenNew(false);
@@ -75,32 +93,34 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
     }
   };
   return (
-    <div className="bg-white w-11/12 lg:w-9/12 rounded-2xl mt-10 p-2 lg:p-12">
+    <div className="border-2 shadow-2xl w-11/12 lg:w-7/12 rounded-2xl mt-10 p-2 lg:p-12">
       {!openInput && (
-        <div className="text-sm lg:text-lg  flex flex-col lg:flex-row gap-2 items-center">
-          <h2> {text}</h2>
-          <div className="flex gap-4 items-center">
-            {" "}
-            <span className={`${hide ? "blur-sm" : null} text-green-600`}>
-              {span}
-            </span>{" "}
-            <BiHide
-              className="cursor-pointer hover:opacity-75"
-              size={20}
-              onClick={() => setHide(!hide)}
-            />
-            <MdModeEditOutline
-              className="cursor-pointer hover:opacity-75"
-              size={20}
-              onClick={() => setOpenInput(true)}
-            />
-            <IoMdAddCircleOutline
-              className="text-red-700 cursor-pointer heart hover:opacity-75"
-              size={20}
-              onClick={() => setopenNew(true)}
-            />
+        <PageWrapper>
+          <div className="text-sm lg:text-lg  flex flex-col lg:flex-row gap-2 items-center">
+            <h2> {text}</h2>
+            <div className="flex gap-4 items-center">
+              {" "}
+              <span className={`${hide ? "blur-sm" : null} text-green-600`}>
+                {span}
+              </span>{" "}
+              <BiHide
+                className="cursor-pointer hover:opacity-75"
+                size={20}
+                onClick={() => setHide(!hide)}
+              />
+              <MdModeEditOutline
+                className="cursor-pointer hover:opacity-75"
+                size={20}
+                onClick={() => setOpenInput(true)}
+              />
+              <IoMdAddCircleOutline
+                className="text-red-700 cursor-pointer heart hover:opacity-75"
+                size={20}
+                onClick={() => setopenNew(true)}
+              />
+            </div>
           </div>
-        </div>
+        </PageWrapper>
       )}
       {openInput && (
         <PageWrapper>
@@ -148,9 +168,16 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
                 X
               </p>
 
-              <p className="text-xl">
-                {income === "Bills" ? "Nova Despesa" : "Novo Boleto"}
-              </p>
+              <div className="flex gap-2 items-center">
+                <p className="text-xl">
+                  {income === "Bills" ? "Nova Despesa" : "Novo Boleto"}
+                </p>
+                <ImInfo
+                  className="cursor-pointer hover:opacity-75"
+                  size={18}
+                  onClick={() => setOpenInfo(!info)}
+                />
+              </div>
               <div className="flex  flex-col gap-4 flex-wrap">
                 <div className="flex gap-0 lg:gap-4 flex-wrap">
                   <div className="flex flex-col mt-4 text-gray-700">
@@ -223,6 +250,11 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
                 />
 
                 {warning && warning}
+                <PageWrapper>
+                  {info && (
+                    <HowWorksThis text="Aqui você definirá suas despesas; certifique-se de preencher todos os dados. O campo de observação não é obrigatório, mas pode ser útil em caso de lembretes adicionais." />
+                  )}
+                </PageWrapper>
 
                 <div className="flex justify-center mt-10">
                   <MdDone

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import MyExpenses from "../components/MyExpenses";
 import ItensExpenses from "../components/ItensExpenses";
-import IncomeBills, { incomeBillValue } from "../datas/incomeBills";
+import IncomeBills from "../datas/incomeBills";
 import { format, isToday, parseISO } from "date-fns";
 import { fetchDataAndSetBills } from "../datas/takeBills";
 import { BiDownArrowAlt } from "react-icons/bi";
@@ -10,26 +10,31 @@ import { FaDeleteLeft } from "react-icons/fa6";
 import { CiWarning } from "react-icons/ci";
 import { removeBill } from "../datas/removeBill";
 import Loading from "../loading";
+import { useRouter } from "next/navigation";
 
 function PageHome() {
   const [bills, setBills] = useState<myBills[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [incomeBill, setIncomeBill] = useState<number>(0);
+  const [name, setName] = useState<string>("");
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    if (localStorage.getItem("nome")) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 400);
-    } else {
-      setLoading(true);
+    let bills;
+    if (
+      typeof window !== "undefined" &&
+      localStorage.getItem("incomeBills") !== null
+    ) {
+      setIncomeBill(parseFloat(localStorage.getItem("incomeBills") as any));
+      bills = localStorage.getItem("incomeBills");
+      setName(localStorage.getItem("name")!!);
     }
     fetchDataAndSetBills(setBills);
-  }, []);
-
+  }, [bills]);
   return (
     <>
       {loading ? (
-        <div className=" h-full px-0 lg:px-24 pt-10">
-          <div className="flex justify-center ">
+        <div className=" h-full  pt-10 w-full flex flex-col ">
+          <div className="flex justify-center items-center    ">
             <div className="typewriter shadow-2xl p-4 rounded-lg ">
               <div className="slide">
                 <i></i>
@@ -58,7 +63,7 @@ function PageHome() {
                   {bills.map((bill) => (
                     <div key={bill._id}>
                       {isToday(parseISO(bill.date)) ? (
-                        <div className="flex  font-bold text-sm justify-between items-center text-gray-800 px-2 ">
+                        <div className="flex  font-bold text-sm justify-between items-center text-gray-800 px-2">
                           <div className="flex justify-between items-center w-full ">
                             <p className="w-1/3 overflow-auto">{bill.name}</p>
                             <p className="flex justify-center w-1/3">
@@ -82,10 +87,17 @@ function PageHome() {
                   {bills.length > 0 ? (
                     bills.map((bill) => (
                       <div
-                        className="flex justify-between items-center mt-2 text-sm "
+                        className="flex justify-between
+                         items-center mt-2 text-sm   "
                         key={bill._id}
                       >
-                        <div className="w-1/3 lg:w-1/4 overflow-auto  ">
+                        <div
+                          className="w-1/3 lg:w-1/4 overflow-auto hover:bg-opacity-20
+                          hover:text-black hover:bg-sky-400 cursor-pointer  "
+                          onClick={() => {
+                            router.push(`home/${bill._id}?name=${name}`);
+                          }}
+                        >
                           <p className="border-b-2 shadow-lg">{bill.name}</p>
                         </div>
                         <div className="flex justify-center overflow-auto">
@@ -93,18 +105,18 @@ function PageHome() {
                             {format(parseISO(bill.date), "dd/MM/yyyy ", {})}
                           </p>
                         </div>
-                        <div className="w-1/3 lg:w-1/4 flex justify-end gap-1   overflow-auto ">
+                        <div className="w-1/3 lg:w-1/4 flex justify-end gap-1  items-center  overflow-auto ">
                           <p className="text-red-700    ">R$ {bill.price}</p>
                           <FaDeleteLeft
-                            size={24}
+                            size={20}
                             className="cursor-pointer hover:opacity-75 transition-all   "
-                            onClick={() =>
+                            onClick={() => {
                               removeBill(
                                 bill._id,
                                 fetchDataAndSetBills,
                                 setBills
-                              )
-                            }
+                              );
+                            }}
                           />
                         </div>
                       </div>
@@ -115,11 +127,17 @@ function PageHome() {
                 </>
               }
               total={
-                incomeBillValue() -
-                bills.reduce((acc, bill) => acc + bill.price, 0)
+                incomeBill - bills.reduce((acc, bill) => acc + bill.price, 0)
               }
             />
           </main>
+          // TODO
+          <div className="px-4 lg:px-60 pb-10 ">
+            <div className="mt-20 p-2 w-full rounded-2xl lg:w-80 h-48 border-2 shadow-2xl    ">
+              {" "}
+              <p>Meus Boletos</p>
+            </div>
+          </div>
         </div>
       ) : (
         <Loading />
@@ -135,4 +153,5 @@ export interface myBills {
   price: number;
   date: string;
   _id: number;
+  observation?: string;
 }

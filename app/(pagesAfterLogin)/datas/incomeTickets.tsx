@@ -6,7 +6,6 @@ export default function IncomeTickets() {
   useEffect(() => {
     if (typeof window !== "undefined" && window.localStorage) {
       setIncomeTickets(localStorage.getItem("incomeTickets"));
-      console.log("IncomeTickets from localStorage:", IncomeTickets);
     } else {
       console.warn("localStorage is not available on the server side");
     }
