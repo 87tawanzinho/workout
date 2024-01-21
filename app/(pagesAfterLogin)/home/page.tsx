@@ -96,7 +96,6 @@ function PageHome() {
                          items-center mt-2 text-sm   "
                         key={bill._id}
                       >
-                        {warning && <Loading />}
                         <div
                           className="w-1/3 lg:w-1/4 overflow-auto hover:bg-opacity-20
                           hover:text-black hover:bg-sky-400 cursor-pointer  "
@@ -126,6 +125,13 @@ function PageHome() {
                             }}
                           />
                         </div>
+                        {warning && (
+                          <div className="absolute h-screen w-full bg-black bg-opacity-20 top-0 left-0">
+                            <div>
+                              <Loading />
+                            </div>
+                          </div>
+                        )}
                       </div>
                     ))
                   ) : (
