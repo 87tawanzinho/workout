@@ -17,7 +17,7 @@ function Slips() {
     fetchDataAndSetSlips(setData);
   }, []);
   return (
-    <div className="px-4 lg:px-60 pb-10 ">
+    <div className="px-4   custom:px-32  lg:px-60 pb-10 ">
       <div className="mt-20 p-4 w-full  rounded-2xl lg:w-96 flex flex-col   bg-white    ">
         {" "}
         <div className="flex items-center justify-between">
