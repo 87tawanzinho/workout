@@ -33,7 +33,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col justify-center items-center h-full py-8 ">
+    <main className="flex flex-col justify-center items-center h-screen py-8 ">
       <div className="text-center">
         <h2 className="text-4xl">Monify</h2>
         <p>a melhor forma de organizar suas contas</p>

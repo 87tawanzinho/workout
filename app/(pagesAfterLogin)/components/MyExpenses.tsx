@@ -13,6 +13,7 @@ import { IoCheckmark } from "react-icons/io5";
 import { CgClose } from "react-icons/cg";
 import { ImInfo } from "react-icons/im";
 import HowWorksThis from "./HowWorksTotal";
+import Modal, { newPay } from "../Modal";
 interface Expenses {
   text: string;
   span?: ReactNode;
@@ -60,38 +61,6 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
     }
   };
 
-  const newCost = async () => {
-    if (!newPay?.description || !newPay?.price || !newPay?.date) {
-      return setWarning("Preencha todos os campos para prosseguir.");
-    }
-
-    if (newPay.description.length <= 3 || newPay.description.length > 12) {
-      return setWarning(
-        "A descrição tem que ter no minimo 4 dígitos e no maximo 12."
-      );
-    }
-
-    if (newPay.price <= 0) {
-      return setWarning("O preço precisa ser maior que 0.");
-    }
-
-    setWarning("Aguarde, estamos registrando..");
-    try {
-      const res = await instance.put("newBill", {
-        userName: localStorage.getItem("name"),
-        name: newPay?.description,
-        price: newPay?.price,
-        date: newPay?.date,
-        observation: newPay?.observation,
-      });
-      setWarning("");
-      setopenNew(false);
-      fetchDataAndSetBills(setData);
-      console.log(res);
-    } catch (error) {
-      setWarning("Um erro ocorreu, verifique novamente.");
-    }
-  };
   return (
     <div className="bg-white w-11/12 lg:w-7/12 rounded-2xl mt-10 p-2 lg:p-12">
       {!openInput && (
@@ -159,113 +128,14 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
 
       {openNew && (
         <PageWrapperModal>
-          <div className=" flex items-center justify-center h-full top-0 left-0 fixed w-full bg-black bg-opacity-40">
-            <div className=" rounded-xl shadow-2xl bg-white w-11/12 lg:w-9/12 h-auto py-8 px-4 relative">
-              <p
-                className="max-w-min  absolute end-4 top-4 text-red-700 cursor-pointer hover:opacity-75"
-                onClick={() => setopenNew(false)}
-              >
-                X
-              </p>
-
-              <div className="flex gap-2 items-center">
-                <p className="text-xl">
-                  {income === "Bills" ? "Nova Despesa" : "Novo Boleto"}
-                </p>
-                <ImInfo
-                  className="cursor-pointer hover:opacity-75"
-                  size={18}
-                  onClick={() => setOpenInfo(!info)}
-                />
-              </div>
-              <div className="flex  flex-col gap-4 flex-wrap">
-                <div className="flex gap-0 lg:gap-4 flex-wrap">
-                  <div className="flex flex-col mt-4 text-gray-700">
-                    <span>Descrição</span>
-                    <input
-                      type="text"
-                      className="  "
-                      name="description"
-                      onChange={(e) =>
-                        setNewPay(
-                          (prev) =>
-                            ({
-                              ...prev,
-                              [e.target.name]: e.target.value,
-                            } as newPay)
-                        )
-                      }
-                    />
-                  </div>
-
-                  <div className="flex flex-col mt-4">
-                    <span>Preço</span>
-                    <input
-                      type="number"
-                      className="  "
-                      name="price"
-                      onChange={(e) =>
-                        setNewPay(
-                          (prev) =>
-                            ({
-                              ...prev,
-                              [e.target.name]: e.target.value,
-                            } as newPay)
-                        )
-                      }
-                    />
-                  </div>
-
-                  <div className="flex flex-col mt-4">
-                    <span>Data de Pagamento</span>
-                    <input
-                      type="date"
-                      className=" "
-                      placeholder="Custo"
-                      name="date"
-                      onChange={(e) =>
-                        setNewPay(
-                          (prev) =>
-                            ({
-                              ...prev,
-                              [e.target.name]: e.target.value,
-                            } as newPay)
-                        )
-                      }
-                    />
-                  </div>
-                  {income === "Tickets" && <p>Todo</p>}
-                </div>
-
-                <textarea
-                  placeholder="Observação"
-                  className="w-64  "
-                  name="observation"
-                  onChange={(e) =>
-                    setNewPay(
-                      (prev) =>
-                        ({ ...prev, [e.target.name]: e.target.value } as newPay)
-                    )
-                  }
-                />
-
-                {warning && warning}
-                <PageWrapper>
-                  {info && (
-                    <HowWorksThis text="Aqui você definirá suas despesas; certifique-se de preencher todos os dados. O campo de observação não é obrigatório, mas pode ser útil em caso de lembretes adicionais." />
-                  )}
-                </PageWrapper>
-
-                <div className="flex justify-center mt-10">
-                  <MdDone
-                    onClick={newCost}
-                    className="bg-sky-400 rounded-full text-green-100 cursor-pointer hover:bg-black transition-all"
-                    size={80}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <Modal
+            setData={setData}
+            income="Bills"
+            info={info}
+            setNewPay={setNewPay}
+            setOpenInfo={setOpenInfo}
+            setopenNew={setopenNew}
+          />
         </PageWrapperModal>
       )}
     </div>
@@ -273,10 +143,3 @@ function MyExpenses({ text, span, income, setData }: Expenses) {
 }
 
 export default MyExpenses;
-
-interface newPay {
-  description: string;
-  price: number;
-  observation: string;
-  date: String;
-}

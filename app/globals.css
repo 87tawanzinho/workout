@@ -5,11 +5,12 @@
 body,
 html,
 :root {
-  height: 100vh;
   box-sizing: border-box;
   transition: all;
   color: rgb(39, 39, 39);
-  background: #e0dedd9c;
+}
+body {
+  background: linear-gradient(to bottom right, #e0dedd, #e0dedd9c);
 }
 
 input[type="date"] {
@@ -29,15 +30,6 @@ textarea {
 .bg-nav {
   background: #131313;
   color: rgb(241, 241, 241);
-}
-
-.bg-home {
-  background: rgb(21, 8, 24);
-  color: rgb(230, 230, 230);
-}
-
-.bg-home input {
-  color: rgb(51, 50, 50);
 }
 
 body:hover,

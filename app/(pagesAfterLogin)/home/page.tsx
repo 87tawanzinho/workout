@@ -38,7 +38,7 @@ function PageHome() {
   return (
     <>
       {loading === false ? (
-        <div className=" h-full  pt-10 w-full flex flex-col ">
+        <div className=" bg-home  pt-10 w-full flex flex-col  ">
           <div className="flex justify-center items-center    ">
             <div className="typewriter shadow-2xl p-4 rounded-lg ">
               <div className="slide">

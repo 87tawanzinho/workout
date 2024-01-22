@@ -26,7 +26,7 @@ function SignUpPage() {
   };
 
   return (
-    <main className="flex flex-col justify-center items-center h-full  ">
+    <main className="flex flex-col justify-center items-center h-screen  ">
       <div className="text-center">
         <h2 className="text-4xl">Monify</h2>
         <p>Seja bem vindo!</p>
